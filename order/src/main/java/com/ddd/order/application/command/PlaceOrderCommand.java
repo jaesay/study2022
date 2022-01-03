@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlaceOrderCommand {
     @NotNull
-    private Long memberId;
+    private long memberId;
 
     @Valid
     private List<OrderProductCommand> orderProductCommands;
@@ -17,20 +17,28 @@ public class PlaceOrderCommand {
     @Valid
     private ShippingInfoCommand shippingInfoCommand;
 
-    /* Inner Class*/
     public static class OrderProductCommand {
         @NotNull
-        private Long productId;
+        private long productId;
         @Length(min = 1)
         private int quantity;
 
         /* Getter */
-        public Long getProductId() {
+        public long getProductId() {
             return productId;
         }
 
         public int getQuantity() {
             return quantity;
+        }
+
+        /* Setter */
+        public void setProductId(long productId) {
+            this.productId = productId;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
         }
     }
 
@@ -83,10 +91,35 @@ public class PlaceOrderCommand {
         public String getReceiverPhone() {
             return receiverPhone;
         }
+
+        /* Setter */
+        public void setZipCode(String zipCode) {
+            this.zipCode = zipCode;
+        }
+
+        public void setAddress1(String address1) {
+            this.address1 = address1;
+        }
+
+        public void setAddress2(String address2) {
+            this.address2 = address2;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public void setReceiverName(String receiverName) {
+            this.receiverName = receiverName;
+        }
+
+        public void setReceiverPhone(String receiverPhone) {
+            this.receiverPhone = receiverPhone;
+        }
     }
 
     /* Getter */
-    public Long getMemberId() {
+    public long getMemberId() {
         return memberId;
     }
 
@@ -96,5 +129,18 @@ public class PlaceOrderCommand {
 
     public ShippingInfoCommand getShippingInfoCommand() {
         return shippingInfoCommand;
+    }
+
+    /* Setter */
+    public void setMemberId(long memberId) {
+        this.memberId = memberId;
+    }
+
+    public void setOrderProductCommands(List<OrderProductCommand> orderProductCommands) {
+        this.orderProductCommands = orderProductCommands;
+    }
+
+    public void setShippingInfoCommand(ShippingInfoCommand shippingInfoCommand) {
+        this.shippingInfoCommand = shippingInfoCommand;
     }
 }

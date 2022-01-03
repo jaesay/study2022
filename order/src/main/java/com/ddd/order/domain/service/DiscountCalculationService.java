@@ -2,7 +2,7 @@ package com.ddd.order.domain.service;
 
 import com.ddd.order.domain.model.Money;
 import com.ddd.order.domain.model.OrderEntity;
-import com.ddd.order.infra.client.MemberClient;
+import com.ddd.order.infra.client.ClientHelper;
 import com.ddd.order.infra.client.MemberDto;
 import org.springframework.stereotype.Service;
 
@@ -10,18 +10,14 @@ import java.math.BigDecimal;
 
 @Service // 도메인 서비스
 public class DiscountCalculationService {
-    private final MemberClient memberClient;
-//    private final CouponClient couponClient;
+    private final ClientHelper clientHelper;
 
-    public DiscountCalculationService(MemberClient memberClient) {
-        this.memberClient = memberClient;
+    public DiscountCalculationService(ClientHelper clientHelper) {
+        this.clientHelper = clientHelper;
     }
 
     public Money calculateDiscountAmounts(OrderEntity orderEntity) {
-        MemberDto member = memberClient.getMember(orderEntity.getOrderer().getMemberId());
-        if (member == null) {
-            throw new RuntimeException("member not found");
-        }
+        MemberDto member = clientHelper.findMember(orderEntity.getOrderer().getMemberId());
 
         Money couponDiscount = calculateDiscount();
         Money memberGradeDiscount = calculateDiscounts(orderEntity.getTotalAmounts(), member.getGrade());

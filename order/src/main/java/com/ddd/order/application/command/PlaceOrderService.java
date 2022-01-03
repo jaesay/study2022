@@ -4,9 +4,8 @@ import com.ddd.order.application.command.PlaceOrderCommand.OrderProductCommand;
 import com.ddd.order.application.command.PlaceOrderCommand.ShippingInfoCommand;
 import com.ddd.order.domain.model.*;
 import com.ddd.order.domain.service.DiscountCalculationService;
-import com.ddd.order.infra.client.MemberClient;
+import com.ddd.order.infra.client.ClientHelper;
 import com.ddd.order.infra.client.MemberDto;
-import com.ddd.order.infra.client.ProductClient;
 import com.ddd.order.infra.client.ProductDto;
 import com.ddd.order.infra.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -19,22 +18,19 @@ import java.util.stream.Collectors;
 public class PlaceOrderService {
 
     private final OrderRepository repository;
-    private final MemberClient memberClient;
-    private final ProductClient productClient;
     private final DiscountCalculationService discountCalculationService;
+    private final ClientHelper clientHelper;
 
-    public PlaceOrderService(OrderRepository repository, MemberClient memberClient, ProductClient productClient, DiscountCalculationService discountCalculationService) {
+    public PlaceOrderService(OrderRepository repository, DiscountCalculationService discountCalculationService, ClientHelper clientHelper) {
         this.repository = repository;
-        this.memberClient = memberClient;
-        this.productClient = productClient;
         this.discountCalculationService = discountCalculationService;
+        this.clientHelper = clientHelper;
     }
 
     @Transactional
     public PlaceOrderCommandResult placeOrder(PlaceOrderCommand command) {
         // 주문자 생성
-        MemberDto member = findMember(command);
-        Orderer orderer = new Orderer(member.getMemberId(), member.getName());
+        Orderer orderer = createOrderer(command.getMemberId());
 
         // 주문상품 생성
         List<OrderProduct> orderProducts = command.getOrderProductCommands().stream()
@@ -58,26 +54,19 @@ public class PlaceOrderService {
         return PlaceOrderCommandResult.from(orderEntity);
     }
 
-    // TODO 코드 커지면 적절한 패키지 찾기 => helper?
-    private MemberDto findMember(PlaceOrderCommand command) {
-        MemberDto member = memberClient.getMember(command.getMemberId());
-        if (member == null) {
-            throw new RuntimeException("member not found");
-        }
-        return member;
+    private Orderer createOrderer(long memberId) {
+        MemberDto member = clientHelper.findMember(memberId);
+        return new Orderer(member.getMemberId(), member.getName());
     }
 
-    private OrderProduct createOrderProduct(OrderProductCommand orderProductCommand) {
-        ProductDto product = productClient.getProduct(orderProductCommand.getProductId());
-        if (product == null) {
-            throw new RuntimeException("product not found");
-        }
-        return new OrderProduct(product.getId(), product.getPrice(), orderProductCommand.getQuantity());
+    private OrderProduct createOrderProduct(OrderProductCommand command) {
+        ProductDto product = clientHelper.findProduct(command.getProductId());
+        return new OrderProduct(product.getId(), product.getPrice(), command.getQuantity());
     }
 
-    private ShippingInfo createShoppingInfo(ShippingInfoCommand request) {
-        Address address = new Address(request.getZipCode(), request.getAddress1(), request.getAddress2());
-        Receiver receiver = new Receiver(request.getReceiverName(), request.getReceiverPhone());
-        return new ShippingInfo(address, request.getMessage(), receiver);
+    private ShippingInfo createShoppingInfo(ShippingInfoCommand command) {
+        Address address = new Address(command.getZipCode(), command.getAddress1(), command.getAddress2());
+        Receiver receiver = new Receiver(command.getReceiverName(), command.getReceiverPhone());
+        return new ShippingInfo(address, command.getMessage(), receiver);
     }
 }

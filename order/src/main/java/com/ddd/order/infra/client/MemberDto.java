@@ -1,17 +1,17 @@
 package com.ddd.order.infra.client;
 
 public class MemberDto {
-    private Long memberId;
+    private long memberId;
     private String name;
     private MemberGrade grade;
 
-    public MemberDto(Long memberId, String name, MemberGrade grade) {
+    public MemberDto(long memberId, String name, MemberGrade grade) {
         this.memberId = memberId;
         this.name = name;
         this.grade = grade;
     }
 
-    public Long getMemberId() {
+    public long getMemberId() {
         return memberId;
     }
 

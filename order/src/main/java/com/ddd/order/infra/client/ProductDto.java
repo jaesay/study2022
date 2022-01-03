@@ -3,17 +3,17 @@ package com.ddd.order.infra.client;
 import com.ddd.order.domain.model.Money;
 
 public class ProductDto {
-    private Long id;
+    private long id;
     private String name;
     private Money price;
 
-    public ProductDto(Long id, String name, Money price) {
+    public ProductDto(long id, String name, Money price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

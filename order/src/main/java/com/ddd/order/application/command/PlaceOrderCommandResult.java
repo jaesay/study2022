@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlaceOrderCommandResult {
-    private Long orderId;
+    private long orderId;
     private Orderer orderer;
     private List<OrderProduct> orderProducts;
     private ShippingInfo shippingInfo;
@@ -38,7 +38,7 @@ public class PlaceOrderCommandResult {
     }
 
     /* Getter */
-    public Long getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
