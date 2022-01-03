@@ -2,7 +2,7 @@ package com.ddd.order.application.command;
 
 import com.ddd.order.application.command.PlaceOrderCommand.OrderProductCommand;
 import com.ddd.order.application.command.PlaceOrderCommand.ShippingInfoCommand;
-import com.ddd.order.domain.aggregate.*;
+import com.ddd.order.domain.model.*;
 import com.ddd.order.domain.service.DiscountCalculationService;
 import com.ddd.order.infra.client.MemberClient;
 import com.ddd.order.infra.client.MemberDto;

@@ -1,4 +1,4 @@
-package com.ddd.order.domain.aggregate;
+package com.ddd.order.domain.model;
 
 import javax.persistence.*;
 

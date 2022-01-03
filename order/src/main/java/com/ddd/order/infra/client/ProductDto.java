@@ -1,6 +1,6 @@
 package com.ddd.order.infra.client;
 
-import com.ddd.order.domain.aggregate.Money;
+import com.ddd.order.domain.model.Money;
 
 public class ProductDto {
     private Long id;

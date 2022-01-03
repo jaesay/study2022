@@ -1,7 +1,7 @@
 package com.ddd.order.domain.service;
 
-import com.ddd.order.domain.aggregate.Money;
-import com.ddd.order.domain.aggregate.OrderEntity;
+import com.ddd.order.domain.model.Money;
+import com.ddd.order.domain.model.OrderEntity;
 import com.ddd.order.infra.client.MemberClient;
 import com.ddd.order.infra.client.MemberDto;
 import org.springframework.stereotype.Service;

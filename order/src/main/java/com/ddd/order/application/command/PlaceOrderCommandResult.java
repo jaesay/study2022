@@ -1,6 +1,6 @@
 package com.ddd.order.application.command;
 
-import com.ddd.order.domain.aggregate.*;
+import com.ddd.order.domain.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

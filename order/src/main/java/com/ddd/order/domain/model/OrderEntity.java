@@ -1,4 +1,4 @@
-package com.ddd.order.domain.aggregate;
+package com.ddd.order.domain.model;
 
 import com.ddd.order.domain.service.DiscountCalculationService;
 import org.springframework.data.annotation.CreatedDate;
