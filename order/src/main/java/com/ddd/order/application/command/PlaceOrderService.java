@@ -48,7 +48,9 @@ public class PlaceOrderService {
         OrderEntity orderEntity = new OrderEntity(orderer, orderProducts, shippingInfo);
 
         // 할인 계산
-        orderEntity.applyDiscount(discountCalculationService, member.getGrade());
+        // Bounded Context로 결제(Payment)를 추가하고 결제 서비스에서 처리하는 것도 좋아보임
+        // 그럴 경우 요구사항에 맞게 트랜잭션 처리가 필요
+        orderEntity.calculatePaymentAmounts(discountCalculationService);
 
         // 주문 저장
         repository.save(orderEntity);

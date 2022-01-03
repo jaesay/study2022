@@ -1,7 +1,6 @@
 package com.ddd.order.domain.aggregate;
 
 import com.ddd.order.domain.service.DiscountCalculationService;
-import com.ddd.order.infra.client.MemberDto;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -11,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "orders")
@@ -29,11 +27,8 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProductEntity> orderProducts = new ArrayList<>();
 
-    @Column(name = "totalAmounts")
+    @Column(name = "total_amounts")
     private Money totalAmounts;
-
-    @Column(name = "discounted_total_amounts")
-    private Money discountedTotalAmounts;
 
     @Column(name = "payment_amounts")
     private Money paymentAmounts;
@@ -97,17 +92,9 @@ public class OrderEntity {
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
     }
 
-    public void applyDiscount(DiscountCalculationService discountCalculationService, MemberDto.MemberGrade memberGrade) {
-        List<OrderProduct> orderProducts = this.orderProducts.stream().map(OrderProductEntity::getOrderProduct)
-                .collect(Collectors.toList());
-
-        orderProducts.forEach(orderProduct -> {
-                    orderProduct.calculateDiscountedMembershipAmounts(discountCalculationService, memberGrade);
-                    orderProduct.calculateDiscountedCouponAmounts(discountCalculationService);
-                });
-
-        this.discountedTotalAmounts = discountCalculationService.calculateDiscountedTotalAmounts(orderProducts);
-        this.paymentAmounts = this.totalAmounts.minus(this.discountedTotalAmounts);
+    public void calculatePaymentAmounts(DiscountCalculationService discountCalculationService) {
+        Money discountAmounts = discountCalculationService.calculateDiscountAmounts(this);
+        this.paymentAmounts = totalAmounts.minus(discountAmounts);
     }
 
     /* Getter */
@@ -125,10 +112,6 @@ public class OrderEntity {
 
     public Money getTotalAmounts() {
         return totalAmounts;
-    }
-
-    public Money getDiscountedTotalAmounts() {
-        return discountedTotalAmounts;
     }
 
     public Money getPaymentAmounts() {
