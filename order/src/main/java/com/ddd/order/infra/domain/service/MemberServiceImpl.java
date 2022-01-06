@@ -25,8 +25,8 @@ public class MemberServiceImpl implements MemberService {
         return toOrderer(member);
     }
 
-    // 복잡할 시 mapper/translator 등 별도 클래스 만들고 변환 처리
+    // 복잡할 시 mapper/translator/converter 등 별도 클래스 만들고 변환 처리
     private Orderer toOrderer(MemberDto member) {
-        return new Orderer(member.getMemberId(), member.getName());
+        return Orderer.create(member.getMemberId(), member.getName());
     }
 }

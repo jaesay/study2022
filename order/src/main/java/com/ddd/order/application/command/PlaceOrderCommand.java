@@ -1,12 +1,17 @@
 package com.ddd.order.application.command;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@Getter @ToString @Builder
 public class PlaceOrderCommand {
     @NotNull
     private long memberId;
@@ -17,31 +22,20 @@ public class PlaceOrderCommand {
     @Valid
     private ShippingInfoCommand shippingInfoCommand;
 
+    // 롬복 @Bulder 시 모든 필드를 argument로 가진 constructor가 필요하여 private으로 생성
+    private PlaceOrderCommand(long memberId, List<OrderProductCommand> orderProductCommands, ShippingInfoCommand shippingInfoCommand) { this.memberId = memberId;this.orderProductCommands = orderProductCommands;this.shippingInfoCommand = shippingInfoCommand; }
+
+    @Getter @ToString @Builder
     public static class OrderProductCommand {
         @NotNull
         private long productId;
-        @Length(min = 1)
+        @Min(1)
         private int quantity;
 
-        /* Getter */
-        public long getProductId() {
-            return productId;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        /* Setter */
-        public void setProductId(long productId) {
-            this.productId = productId;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
+        private OrderProductCommand(long productId, int quantity) { this.productId = productId;this.quantity = quantity; }
     }
 
+    @Getter @ToString @Builder
     public static class ShippingInfoCommand {
         @NotBlank
         @Length(min = 2, max = 10)
@@ -67,80 +61,6 @@ public class PlaceOrderCommand {
         @Length(min = 5, max = 15)
         private String receiverPhone;
 
-        /* Getter */
-        public String getZipCode() {
-            return zipCode;
-        }
-
-        public String getAddress1() {
-            return address1;
-        }
-
-        public String getAddress2() {
-            return address2;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public String getReceiverName() {
-            return receiverName;
-        }
-
-        public String getReceiverPhone() {
-            return receiverPhone;
-        }
-
-        /* Setter */
-        public void setZipCode(String zipCode) {
-            this.zipCode = zipCode;
-        }
-
-        public void setAddress1(String address1) {
-            this.address1 = address1;
-        }
-
-        public void setAddress2(String address2) {
-            this.address2 = address2;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public void setReceiverName(String receiverName) {
-            this.receiverName = receiverName;
-        }
-
-        public void setReceiverPhone(String receiverPhone) {
-            this.receiverPhone = receiverPhone;
-        }
-    }
-
-    /* Getter */
-    public long getMemberId() {
-        return memberId;
-    }
-
-    public List<OrderProductCommand> getOrderProductCommands() {
-        return orderProductCommands;
-    }
-
-    public ShippingInfoCommand getShippingInfoCommand() {
-        return shippingInfoCommand;
-    }
-
-    /* Setter */
-    public void setMemberId(long memberId) {
-        this.memberId = memberId;
-    }
-
-    public void setOrderProductCommands(List<OrderProductCommand> orderProductCommands) {
-        this.orderProductCommands = orderProductCommands;
-    }
-
-    public void setShippingInfoCommand(ShippingInfoCommand shippingInfoCommand) {
-        this.shippingInfoCommand = shippingInfoCommand;
+        private ShippingInfoCommand(String zipCode, String address1, String address2, String message, String receiverName, String receiverPhone) { this.zipCode = zipCode;this.address1 = address1;this.address2 = address2;this.message = message;this.receiverName = receiverName;this.receiverPhone = receiverPhone; }
     }
 }

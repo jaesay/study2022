@@ -1,10 +1,15 @@
 package com.ddd.order.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
+@Getter
+@ToString
 public class Orderer {
 
     @Column(name = "orderer_id")
@@ -14,24 +19,16 @@ public class Orderer {
     private String name;
 
     /* Constructor */
-    protected Orderer() {
+    protected Orderer() {}
+
+    /* Static Factory Method */
+    public static Orderer create(Long memberId, String name) {
+        Orderer orderer = new Orderer();
+        orderer.memberId = memberId;
+        orderer.name = name;
+        return orderer;
     }
 
-    public Orderer(Long memberId, String name) {
-        this.memberId = memberId;
-        this.name = name;
-    }
-
-    /* Getter, Setter */
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    /* Override Method */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

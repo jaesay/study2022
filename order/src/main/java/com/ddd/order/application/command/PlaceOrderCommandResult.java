@@ -1,11 +1,14 @@
 package com.ddd.order.application.command;
 
 import com.ddd.order.domain.model.*;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter @ToString
 public class PlaceOrderCommandResult {
     private long orderId;
     private Orderer orderer;
@@ -16,16 +19,15 @@ public class PlaceOrderCommandResult {
     private LocalDateTime orderedAt;
 
     /* Constructor */
-    private PlaceOrderCommandResult() {
-    }
+    private PlaceOrderCommandResult() {}
 
-    /* Factory Method */
+    /* Static Factory Method */
     public static PlaceOrderCommandResult from(OrderEntity orderEntity) {
         PlaceOrderCommandResult result = new PlaceOrderCommandResult();
         result.orderId = orderEntity.getId();
         result.orderer = orderEntity.getOrderer();
         result.orderProducts = orderEntity.getOrderProducts().stream()
-                        .map(orderProductEntity -> new OrderProduct(
+                        .map(orderProductEntity -> OrderProduct.create(
                                 orderProductEntity.getOrderProduct().getProductId(),
                                 orderProductEntity.getOrderProduct().getPrice(),
                                 orderProductEntity.getOrderProduct().getQuantity()))
@@ -35,34 +37,5 @@ public class PlaceOrderCommandResult {
         result.state = orderEntity.getState();
         result.orderedAt = orderEntity.getOrderedAt();
         return result;
-    }
-
-    /* Getter */
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public Orderer getOrderer() {
-        return orderer;
-    }
-
-    public List<OrderProduct> getOrderProducts() {
-        return orderProducts;
-    }
-
-    public ShippingInfo getShippingInfo() {
-        return shippingInfo;
-    }
-
-    public Money getTotalAmounts() {
-        return totalAmounts;
-    }
-
-    public OrderState getState() {
-        return state;
-    }
-
-    public LocalDateTime getOrderedAt() {
-        return orderedAt;
     }
 }

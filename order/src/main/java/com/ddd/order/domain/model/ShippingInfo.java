@@ -1,8 +1,14 @@
 package com.ddd.order.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Embeddable
+@Getter
+@ToString
 public class ShippingInfo {
 
     @Embedded
@@ -20,25 +26,29 @@ public class ShippingInfo {
     private Receiver receiver;
 
     /* Constructor */
-    protected ShippingInfo() {
+    protected ShippingInfo() {}
+
+    /* Static Factory Method*/
+    public static ShippingInfo create(Address address, String message, Receiver receiver) {
+        ShippingInfo shippingInfo = new ShippingInfo();
+        shippingInfo.address = address;
+        shippingInfo.message = message;
+        shippingInfo.receiver = receiver;
+        return shippingInfo;
     }
 
-    public ShippingInfo(Address address, String message, Receiver receiver) {
-        this.address = address;
-        this.message = message;
-        this.receiver = receiver;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShippingInfo that = (ShippingInfo) o;
+        return Objects.equals(address, that.address) &&
+                Objects.equals(message, that.message) &&
+                Objects.equals(receiver, that.receiver);
     }
 
-    /* Getter */
-    public Address getAddress() {
-        return address;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public Receiver getReceiver() {
-        return receiver;
+    @Override
+    public int hashCode() {
+        return Objects.hash(address, message, receiver);
     }
 }

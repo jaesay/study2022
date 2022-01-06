@@ -1,9 +1,14 @@
 package com.ddd.order.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "order_item")
+@Getter
+@ToString(exclude = "order")
 public class OrderProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,21 +24,12 @@ public class OrderProductEntity {
 
     /* Constructor */
     protected OrderProductEntity() {}
-    public OrderProductEntity(OrderProduct orderProduct) {
-        this.orderProduct = orderProduct;
-    }
 
-    /* Getter */
-    public Long getId() {
-        return id;
-    }
-
-    public OrderEntity getOrder() {
-        return order;
-    }
-
-    public OrderProduct getOrderProduct() {
-        return orderProduct;
+    /* Static Factory Method */
+    public static OrderProductEntity from(OrderProduct orderProduct) {
+        OrderProductEntity orderProductEntity = new OrderProductEntity();
+        orderProductEntity.orderProduct = orderProduct;
+        return orderProductEntity;
     }
 
     /* Relationship Method */

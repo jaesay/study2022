@@ -1,10 +1,15 @@
 package com.ddd.order.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
+@Getter
+@ToString
 public class Receiver {
     @Column(name = "receiver_name")
     private String name;
@@ -13,24 +18,16 @@ public class Receiver {
     private String phone;
 
     /* Constructor */
-    protected Receiver() {
+    protected Receiver() {}
+
+    /* Static Factory Method */
+    public static Receiver create(String name, String phone) {
+        Receiver receiver = new Receiver();
+        receiver.name = name;
+        receiver.phone = phone;
+        return receiver;
     }
 
-    public Receiver(String name, String phone) {
-        this.name = name;
-        this.phone = phone;
-    }
-
-    /* Getter, Setter */
-    public String getName() {
-        return name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    /* Override Method */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,13 +40,5 @@ public class Receiver {
     @Override
     public int hashCode() {
         return Objects.hash(name, phone);
-    }
-
-    @Override
-    public String toString() {
-        return "Receiver{" +
-                "name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
     }
 }

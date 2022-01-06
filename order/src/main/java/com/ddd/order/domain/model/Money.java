@@ -1,24 +1,19 @@
 package com.ddd.order.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-// TODO 코드 커지면 적절한 패키지 찾기
+@Getter @ToString
 public class Money {
     private BigDecimal value;
-//    private String currencyCode;
 
     /* Constructor */
-    protected Money() {}
-
     public Money(BigDecimal value) {
         this.value = value;
-    }
-
-    /* Getter, Setter */
-    public BigDecimal getValue() {
-        return value;
     }
 
     /* Business Logic */
@@ -50,12 +45,5 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(value);
-    }
-
-    @Override
-    public String toString() {
-        return "Money{" +
-                "value=" + value +
-                '}';
     }
 }

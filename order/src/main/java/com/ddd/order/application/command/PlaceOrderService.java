@@ -41,7 +41,7 @@ public class PlaceOrderService {
         ShippingInfo shippingInfo = createShoppingInfo(command.getShippingInfoCommand());
 
         // 주문 생성
-        OrderEntity orderEntity = new OrderEntity(orderer, orderProducts, shippingInfo);
+        OrderEntity orderEntity = OrderEntity.create(orderer, orderProducts, shippingInfo);
 
         // 결제금액 계산
         // Bounded Context로 결제(Payment)를 추가하고 결제 서비스에서 처리하는 것도 좋아보임
@@ -55,8 +55,8 @@ public class PlaceOrderService {
     }
 
     private ShippingInfo createShoppingInfo(ShippingInfoCommand command) {
-        Address address = new Address(command.getZipCode(), command.getAddress1(), command.getAddress2());
-        Receiver receiver = new Receiver(command.getReceiverName(), command.getReceiverPhone());
-        return new ShippingInfo(address, command.getMessage(), receiver);
+        Address address = Address.create(command.getZipCode(), command.getAddress1(), command.getAddress2());
+        Receiver receiver = Receiver.create(command.getReceiverName(), command.getReceiverPhone());
+        return ShippingInfo.create(address, command.getMessage(), receiver);
     }
 }

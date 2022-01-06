@@ -26,6 +26,6 @@ public class ProductServiceImpl implements ProductService {
 
     // 복잡할 시 mapper/translator 등 별도 클래스 만들고 변환 처리
     private OrderProduct toOrderProduct(ProductDto product, int quantity) {
-        return new OrderProduct(product.getId(), product.getPrice(), quantity);
+        return OrderProduct.create(product.getId(), product.getPrice(), quantity);
     }
 }

@@ -3,6 +3,7 @@ package com.ddd.order.presentation;
 import com.ddd.order.application.command.PlaceOrderCommand;
 import com.ddd.order.application.command.PlaceOrderCommandResult;
 import com.ddd.order.application.command.PlaceOrderService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import javax.validation.Valid;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
 public class OrderCommandController {
 
     private final PlaceOrderService placeOrderService;

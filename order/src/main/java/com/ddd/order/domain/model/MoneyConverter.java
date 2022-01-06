@@ -4,7 +4,6 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.math.BigDecimal;
 
-// TODO 코드 커지면 적절한 패키지 찾기
 @Converter(autoApply = true)
 public class MoneyConverter implements AttributeConverter<Money, Long> {
 

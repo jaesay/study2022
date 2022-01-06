@@ -1,10 +1,11 @@
 package com.ddd.order.domain.model;
 
 import com.ddd.order.domain.service.DiscountCalculationService;
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Access;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,7 +14,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-@Access(AccessType.FIELD)
+@Getter
+@ToString(exclude = "orderProducts")
 public class OrderEntity {
 
     @Id
@@ -47,18 +49,20 @@ public class OrderEntity {
     private LocalDateTime updatedAt;
 
     /* Constructor */
-    protected OrderEntity() {
-    }
+    protected OrderEntity() {}
 
-    public OrderEntity(Orderer orderer, List<OrderProduct> orderProducts, ShippingInfo shippingInfo) {
-        setOrderer(orderer);
-        setOrderProducts(orderProducts);
-        setShippingInfo(shippingInfo);
-        this.state = OrderState.PAYMENT_WAITING;
+    /* Static Factory Method*/
+    public static OrderEntity create(Orderer orderer, List<OrderProduct> orderProducts, ShippingInfo shippingInfo) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderer(orderer);
+        orderEntity.setOrderProducts(orderProducts);
+        orderEntity.setShippingInfo(shippingInfo);
+        orderEntity.state = OrderState.PAYMENT_WAITING;
+        return orderEntity;
     }
 
     /* Relationship Method */
-    public void addOrderItem(OrderProductEntity orderProductEntity) {
+    public void addOrderProducts(OrderProductEntity orderProductEntity) {
         orderProducts.add(orderProductEntity);
         orderProductEntity.setOrder(this);
     }
@@ -71,7 +75,7 @@ public class OrderEntity {
 
     private void setOrderProducts(List<OrderProduct> orderProducts) {
         verifyAtLeastOneOrMoreOrderProducts(orderProducts);
-        orderProducts.stream().map(OrderProductEntity::new).forEach(this::addOrderItem);
+        orderProducts.stream().map(OrderProductEntity::from).forEach(this::addOrderProducts);
         calculateTotalAmounts();
     }
 
@@ -95,42 +99,5 @@ public class OrderEntity {
     public void calculatePaymentAmounts(DiscountCalculationService discountCalculationService) {
         Money discountAmounts = discountCalculationService.calculateDiscountAmounts(this);
         this.paymentAmounts = totalAmounts.minus(discountAmounts);
-    }
-
-    /* Getter */
-    public Long getId() {
-        return id;
-    }
-
-    public Orderer getOrderer() {
-        return orderer;
-    }
-
-    public List<OrderProductEntity> getOrderProducts() {
-        return orderProducts;
-    }
-
-    public Money getTotalAmounts() {
-        return totalAmounts;
-    }
-
-    public Money getPaymentAmounts() {
-        return paymentAmounts;
-    }
-
-    public ShippingInfo getShippingInfo() {
-        return shippingInfo;
-    }
-
-    public OrderState getState() {
-        return state;
-    }
-
-    public LocalDateTime getOrderedAt() {
-        return orderedAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
     }
 }

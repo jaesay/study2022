@@ -1,12 +1,15 @@
 package com.ddd.order.domain.model;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 @Embeddable
-@Access(AccessType.FIELD)
+@Getter
+@ToString
 public class OrderProduct {
     @Column(name = "product_id")
     private Long productId;
@@ -21,35 +24,36 @@ public class OrderProduct {
     private Money amounts;
 
     /* Constructor */
-    protected OrderProduct() {
-    }
+    protected OrderProduct() {}
 
-    public OrderProduct(Long productId, Money price, int quantity) {
-        this.productId = productId;
-        this.price = price;
-        this.quantity = quantity;
-        this.amounts = calculateAmounts();
+    /* Static Factory Method */
+    public static OrderProduct create(Long productId, Money price, int quantity) {
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.productId = productId;
+        orderProduct.price = price;
+        orderProduct.quantity = quantity;
+        orderProduct.calculateAmounts();
+        return orderProduct;
     }
 
     /* Business Logic */
-    private Money calculateAmounts() {
-        return price.multiply(quantity);
+    private void calculateAmounts() {
+        this.amounts = price.multiply(quantity);
     }
 
-    /* Getter */
-    public Long getProductId() {
-        return productId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderProduct that = (OrderProduct) o;
+        return quantity == that.quantity &&
+                Objects.equals(productId, that.productId) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(amounts, that.amounts);
     }
 
-    public Money getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public Money getAmounts() {
-        return amounts;
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId, price, quantity, amounts);
     }
 }

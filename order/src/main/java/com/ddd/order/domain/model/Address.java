@@ -1,10 +1,15 @@
 package com.ddd.order.domain.model;
 
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable
+@Getter
+@ToString
 public class Address {
     @Column(name = "zip_code")
     private String zipCode;
@@ -16,29 +21,17 @@ public class Address {
     private String address2;
 
     /* Constructor */
-    protected Address() {
+    protected Address() {}
+
+    /* Static Factory Method */
+    public static Address create(String zipCode, String address1, String address2) {
+        Address address = new Address();
+        address.zipCode = zipCode;
+        address.address1 = address1;
+        address.address2 = address2;
+        return address;
     }
 
-    public Address(String zipCode, String address1, String address2) {
-        this.zipCode = zipCode;
-        this.address1 = address1;
-        this.address2 = address2;
-    }
-
-    /* Getter, Setter */
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public String getAddress1() {
-        return address1;
-    }
-
-    public String getAddress2() {
-        return address2;
-    }
-
-    /* Override method */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,14 +45,5 @@ public class Address {
     @Override
     public int hashCode() {
         return Objects.hash(zipCode, address1, address2);
-    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "zipCode='" + zipCode + '\'' +
-                ", address1='" + address1 + '\'' +
-                ", address2='" + address2 + '\'' +
-                '}';
     }
 }
