@@ -23,6 +23,9 @@ public class OrderEntity {
     @Column(name = "order_id")
     private Long id;
 
+    @Version
+    private long version;
+
     @Embedded
     private Orderer orderer;
 
@@ -99,5 +102,34 @@ public class OrderEntity {
     public void calculatePaymentAmounts(DiscountCalculationService discountCalculationService) {
         Money discountAmounts = discountCalculationService.calculateDiscountAmounts(this);
         this.paymentAmounts = totalAmounts.minus(discountAmounts);
+    }
+
+    public void startShipping() {
+        verifyShippableState();
+        this.state = OrderState.SHIPPED;
+    }
+
+    private void verifyShippableState() {
+        verifyNotYetShipped();
+        verifyNotCanceled();
+    }
+
+    private void verifyNotYetShipped() {
+        if (!isNotYetShipped())
+            throw new RuntimeException("order already shipped");
+    }
+
+    private boolean isNotYetShipped() {
+        return state == OrderState.PAYMENT_WAITING || state == OrderState.PREPARING;
+    }
+
+    private void verifyNotCanceled() {
+        if (state == OrderState.CANCELED) {
+            throw new RuntimeException("order already canceled");
+        }
+    }
+
+    public boolean matchVersion(long version) {
+        return this.version == version;
     }
 }

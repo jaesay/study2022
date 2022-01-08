@@ -1,8 +1,7 @@
 package com.ddd.order.presentation;
 
-import com.ddd.order.application.command.PlaceOrderCommand;
-import com.ddd.order.application.command.PlaceOrderCommandResult;
-import com.ddd.order.application.command.PlaceOrderService;
+import com.ddd.order.application.command.*;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -19,9 +18,11 @@ import java.util.stream.Collectors;
 public class OrderCommandController {
 
     private final PlaceOrderService placeOrderService;
+    private final StartShippingService startShippingService;
 
-    public OrderCommandController(PlaceOrderService placeOrderService) {
+    public OrderCommandController(PlaceOrderService placeOrderService, StartShippingService startShippingService) {
         this.placeOrderService = placeOrderService;
+        this.startShippingService = startShippingService;
     }
 
     @PostMapping
@@ -34,6 +35,19 @@ public class OrderCommandController {
         }
 
         PlaceOrderCommandResult result = placeOrderService.placeOrder(placeOrderCommand);
+        return ResponseEntity.ok(result);
+//        return ResponseEntity.created(URI.create("/orders/" + result.getOrderId())).body(result); 이런식으로 해도 될 것 같음
+    }
+
+    // request body 없이 @PatchMapping("/{orderId}/versions/{versionId}/start-shipping 이런식으로 해도 될 것 같음
+    @PostMapping("/start-shipping")
+    public ResponseEntity<StartShippingCommandResult> startShipping(@Valid @RequestBody StartShippingCommand command, Errors errors) {
+        if (errors.hasErrors()) {
+            String errorMessage = errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        StartShippingCommandResult result = startShippingService.startShipping(command);
         return ResponseEntity.ok(result);
     }
 }
