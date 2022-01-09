@@ -1,7 +1,7 @@
 package com.ddd.order.presentation;
 
 import com.ddd.order.application.command.*;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.stream.Collectors;
@@ -30,10 +31,7 @@ public class OrderCommandController {
     @PostMapping
     public ResponseEntity<PlaceOrderCommandResult> placeOrder(@Valid @RequestBody PlaceOrderCommand placeOrderCommand, Errors errors) {
         if (errors.hasErrors()) {
-            String errorMessage = errors.getFieldErrors()
-                    .stream().map(error -> error.getField() + ": " + error.getDefaultMessage())
-                    .collect(Collectors.joining(", "));
-            throw new IllegalArgumentException(errorMessage);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, getErrorMessage(errors));
         }
 
         PlaceOrderCommandResult result = placeOrderService.placeOrder(placeOrderCommand);
@@ -45,8 +43,7 @@ public class OrderCommandController {
     @PostMapping("/start-shipping")
     public ResponseEntity<StartShippingCommandResult> startShipping(@Valid @RequestBody StartShippingCommand command, Errors errors) {
         if (errors.hasErrors()) {
-            String errorMessage = errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
-            throw new IllegalArgumentException(errorMessage);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, getErrorMessage(errors));
         }
 
         StartShippingCommandResult result = startShippingService.startShipping(command);
@@ -56,11 +53,14 @@ public class OrderCommandController {
     @PostMapping("/cancel")
     public ResponseEntity<CancelOrderCommandResult> cancel(@Valid @RequestBody CancelOrderCommand command, Errors errors) {
         if (errors.hasErrors()) {
-            String errorMessage = errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
-            throw new IllegalArgumentException(errorMessage);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, getErrorMessage(errors));
         }
 
         CancelOrderCommandResult result = cancelOrderService.cancel(command);
         return ResponseEntity.ok(result);
+    }
+
+    private String getErrorMessage(Errors errors) {
+        return errors.getFieldErrors().stream().map(error -> error.getField() + ": " + error.getDefaultMessage()).collect(Collectors.joining(", "));
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter @ToString @Builder
 public class PlaceOrderCommand {
-    @Min(0)
+    @Min(1)
     private long memberId;
 
     @Valid
@@ -26,7 +26,7 @@ public class PlaceOrderCommand {
 
     @Getter @ToString @Builder
     public static class OrderProductCommand {
-        @Min(0)
+        @Min(1)
         private long productId;
         @Min(1)
         private int quantity;
