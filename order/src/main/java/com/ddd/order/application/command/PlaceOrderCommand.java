@@ -8,12 +8,11 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter @ToString @Builder
 public class PlaceOrderCommand {
-    @NotNull
+    @Min(0)
     private long memberId;
 
     @Valid
@@ -27,7 +26,7 @@ public class PlaceOrderCommand {
 
     @Getter @ToString @Builder
     public static class OrderProductCommand {
-        @NotNull
+        @Min(0)
         private long productId;
         @Min(1)
         private int quantity;
