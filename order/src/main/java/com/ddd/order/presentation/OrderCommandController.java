@@ -19,10 +19,12 @@ public class OrderCommandController {
 
     private final PlaceOrderService placeOrderService;
     private final StartShippingService startShippingService;
+    private final CancelOrderService cancelOrderService;
 
-    public OrderCommandController(PlaceOrderService placeOrderService, StartShippingService startShippingService) {
+    public OrderCommandController(PlaceOrderService placeOrderService, StartShippingService startShippingService, CancelOrderService cancelOrderService) {
         this.placeOrderService = placeOrderService;
         this.startShippingService = startShippingService;
+        this.cancelOrderService = cancelOrderService;
     }
 
     @PostMapping
@@ -48,6 +50,17 @@ public class OrderCommandController {
         }
 
         StartShippingCommandResult result = startShippingService.startShipping(command);
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/cancel")
+    public ResponseEntity<CancelOrderCommandResult> cancel(@Valid @RequestBody CancelOrderCommand command, Errors errors) {
+        if (errors.hasErrors()) {
+            String errorMessage = errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        CancelOrderCommandResult result = cancelOrderService.cancel(command);
         return ResponseEntity.ok(result);
     }
 }

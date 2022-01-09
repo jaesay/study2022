@@ -29,3 +29,6 @@ logging.level:
 eureka:
   client:
     enabled: false
+
+kafka.bootstrapAddress: localhost:9092
+message.topic.name: baeldung

@@ -132,4 +132,9 @@ public class OrderEntity {
     public boolean matchVersion(long version) {
         return this.version == version;
     }
+
+    public void cancel() {
+        verifyNotYetShipped();
+        this.state = OrderState.CANCELED;
+    }
 }
