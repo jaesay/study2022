@@ -7,7 +7,7 @@ public class FunctionalInterfaceExample {
     public static void main(String[] args) {
         System.out.println("============== 함수형 인터페이스와 람다표현식 소개 ==============");
         // java 8 이전에는?
-        // 익명클래스로
+        // anonymous class 로
         RunSomething runSomething1 = new RunSomething() {
             @Override
             public int doIt(int number) {
@@ -17,7 +17,7 @@ public class FunctionalInterfaceExample {
 
         // java 8 부터는?
         // functional interface를 instance를 lambda를 이용해서 생성
-        RunSomething runSomething2 = number -> number +10;
+        RunSomething runSomething2 = number -> number +10; // SAM여서 컴파일러가 추론(infer) 가능
         System.out.println("runSomething2.doIt(1) = " + runSomething2.doIt(1));
 
         // java에서 function programming
@@ -74,5 +74,8 @@ public class FunctionalInterfaceExample {
         // T 타입을 받아서 boolean을 functional interface
         Predicate<Integer> isEven = i -> i%2 == 0;
         System.out.println("isEven.test(2) = " + isEven.test(2));
+
+        // local class 나 익명 클래스에서도 적용되는 규칙이었다
+        // java8 이전에는 final을 반드시 붙여줘야 했다.
     }
 }
