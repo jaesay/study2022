@@ -1,7 +1,4 @@
-package chapter5;
-
-import java.util.ArrayList;
-import java.util.List;
+package chapter5.item27;
 
 public class Item27 {
     // 배열은 covariant

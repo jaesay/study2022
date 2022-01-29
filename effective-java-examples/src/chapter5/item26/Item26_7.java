@@ -1,6 +1,5 @@
-package chapter5;
+package chapter5.item26;
 
-import java.util.List;
 import java.util.Set;
 
 public class Item26_7 {

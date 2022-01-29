@@ -1,14 +1,16 @@
-package chapter5;
+package chapter5.item29;
 
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
-public class Item29_Stack1 {
+// 원소를 읽을 때마다 형변환해야 됨
+// heap pollution이 맘에 걸리는 프로그래머는 두번째 방식을 고수
+public class Item29_Stack3<E> {
     private Object[] elements;
     private int size = 0;
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    public Item29_Stack1() {
+    public Item29_Stack3() {
         elements = new Object[DEFAULT_INITIAL_CAPACITY];
     }
 
@@ -17,9 +19,9 @@ public class Item29_Stack1 {
         elements[size++] = e;
     }
 
-    public Object pop() {
+    public E pop() {
         if (size == 0) throw new EmptyStackException();
-        Object result = elements[--size];
+        @SuppressWarnings("unchecked") E result = (E) elements[--size];
         elements[size] = null; // 다 쓴 참조 객체
         return result;
     }

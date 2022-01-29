@@ -1,4 +1,4 @@
-package chapter5;
+package chapter5.item26;
 
 import java.util.Set;
 
