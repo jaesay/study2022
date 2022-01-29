@@ -3,12 +3,12 @@ package chapter5.item29;
 import java.util.Arrays;
 import java.util.EmptyStackException;
 
-public class Item29_Stack1 {
+public class Stack1 {
     private Object[] elements;
     private int size = 0;
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    public Item29_Stack1() {
+    public Stack1() {
         elements = new Object[DEFAULT_INITIAL_CAPACITY];
     }
 

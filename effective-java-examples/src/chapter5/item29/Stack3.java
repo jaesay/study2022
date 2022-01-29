@@ -5,12 +5,12 @@ import java.util.EmptyStackException;
 
 // 원소를 읽을 때마다 형변환해야 됨
 // heap pollution이 맘에 걸리는 프로그래머는 두번째 방식을 고수
-public class Item29_Stack3<E> {
+public class Stack3<E> {
     private Object[] elements;
     private int size = 0;
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
 
-    public Item29_Stack3() {
+    public Stack3() {
         elements = new Object[DEFAULT_INITIAL_CAPACITY];
     }
 

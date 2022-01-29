@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Item28_Chooser<T> {
+public class Chooser<T> {
     private final List<T> choiceList;
 
-    public Item28_Chooser(Collection<T> choices) {
+    public Chooser(Collection<T> choices) {
         choiceList = new ArrayList<>(choices);
     }
 
