@@ -1,6 +1,6 @@
 package chapter5.item29;
 
-public class Item29 {
+public class Item29Example {
     public static void main(String[] args) {
         Stack2<String> stack  = new Stack2<>();
         for (String arg : args) {
