@@ -1,7 +1,6 @@
-package chapter5.Item31;
+package chapter5.item31;
 
 import java.util.*;
-import java.util.concurrent.ScheduledFuture;
 
 public class Item31Example {
     public static void main(String[] args) {

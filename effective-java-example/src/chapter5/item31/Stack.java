@@ -1,4 +1,4 @@
-package chapter5.Item31;
+package chapter5.item31;
 
 import java.util.Arrays;
 import java.util.Collection;
