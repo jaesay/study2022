@@ -1,8 +1,6 @@
 package chapter5.item32;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -21,8 +19,8 @@ public class Item32Example {
 
         // Object[] => String[]으로 변환할 때 ClassCastException 발생
 //        String[] attributes = pickTwo("좋은", "빠른", "저렴한");
-        pickTwo_v2("좋은", "빠른", "저렴한").forEach(System.out::println);
-        flatten(List.of(nameList1, nameList2)).forEach(System.out::println);
+        System.out.println(pickTwo_v2("좋은", "빠른", "저렴한"));
+        System.out.println(flatten(List.of(nameList1, nameList2)));
     }
 
     static void dangerous(List<String>... stringLists) {
