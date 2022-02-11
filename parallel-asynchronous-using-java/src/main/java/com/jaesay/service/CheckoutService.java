@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import static com.jaesay.util.CommonUtil.startTimer;
 import static com.jaesay.util.CommonUtil.timeTaken;
+import static com.jaesay.util.LoggerUtil.log;
 
 public class CheckoutService {
 
@@ -35,6 +36,25 @@ public class CheckoutService {
             return new CheckoutResponse(CheckoutStatus.FAILURE, priceValidationList);
         }
 
-        return new CheckoutResponse(CheckoutStatus.SUCCESS);
+        double finalPrice = calculateFinalPrice_collect(cart);
+//        double finalPrice = calculateFinalPrice_reduce(cart);
+        log("finalPrice = " + finalPrice);
+
+        return new CheckoutResponse(CheckoutStatus.SUCCESS, finalPrice);
+    }
+
+    private double calculateFinalPrice_collect(Cart cart) {
+        return cart.getCartItemList()
+                .parallelStream()
+                .map(cartItem -> cartItem.getQuantity() * cartItem.getRate())
+                .mapToDouble(Double::doubleValue)
+                .sum();
+    }
+
+    private double calculateFinalPrice_reduce(Cart cart) {
+        return cart.getCartItemList()
+                .parallelStream()
+                .map(cartItem -> cartItem.getQuantity() * cartItem.getRate())
+                .reduce(0.0, Double::sum);
     }
 }
