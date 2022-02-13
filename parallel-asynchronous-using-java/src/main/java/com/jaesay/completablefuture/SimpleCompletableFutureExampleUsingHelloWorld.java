@@ -87,6 +87,31 @@ public class SimpleCompletableFutureExampleUsingHelloWorld {
                 .join();
     }
 
+    public String combine_3_async_calls_log_async() {
+        // independent tasks
+        CompletableFuture<String> helloFuture = CompletableFuture.supplyAsync(helloWorldService::hello);
+        CompletableFuture<String> worldFuture = CompletableFuture.supplyAsync(helloWorldService::world);
+        CompletableFuture<String> hiFuture = CompletableFuture.supplyAsync(() -> {
+            delay(1000);
+            return "Hi";
+        });
+
+        return helloFuture
+                .thenCombineAsync(worldFuture, (h, w) -> {
+                    log("inside thenCombine 1");
+                    return h + w;
+                })
+                .thenCombineAsync(hiFuture, (hw, h) -> {
+                    log("inside thenCombine 2");
+                    return hw + " " + h;
+                })
+                .thenApplyAsync(s -> {
+                    log("inside thenApply");
+                    return s.toUpperCase();
+                })
+                .join();
+    }
+
     public String combine_3_async_calls_customThreadPool() {
         ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
@@ -112,6 +137,62 @@ public class SimpleCompletableFutureExampleUsingHelloWorld {
                     log("inside thenApply");
                     return s.toUpperCase();
                 })
+                .join();
+    }
+
+    public String combine_3_async_calls_customThreadPool_async() {
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+        CompletableFuture<String> helloFuture = CompletableFuture.supplyAsync(helloWorldService::hello, executorService);
+        CompletableFuture<String> worldFuture = CompletableFuture.supplyAsync(helloWorldService::world, executorService);
+        CompletableFuture<String> hiFuture = CompletableFuture.supplyAsync(() -> {
+            delay(1000);
+            return "Hi";
+        }, executorService);
+
+        // Whole pipeline이 custom thread pool에서 동작
+        // thenCombine, thenApply 등도 custom thread pool에서 동작
+        return helloFuture
+                .thenCombineAsync(worldFuture, (h, w) -> {
+                    log("inside thenCombine 1");
+                    return h + w;
+                })
+                .thenCombineAsync(hiFuture, (hw, h) -> {
+                    log("inside thenCombine 2");
+                    return hw + " " + h;
+                })
+                .thenApplyAsync(s -> {
+                    log("inside thenApply");
+                    return s.toUpperCase();
+                })
+                .join();
+    }
+
+    public String combine_3_async_calls_customThreadPool_async_2() {
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+        CompletableFuture<String> helloFuture = CompletableFuture.supplyAsync(helloWorldService::hello, executorService);
+        CompletableFuture<String> worldFuture = CompletableFuture.supplyAsync(helloWorldService::world, executorService);
+        CompletableFuture<String> hiFuture = CompletableFuture.supplyAsync(() -> {
+            delay(1000);
+            return "Hi";
+        }, executorService);
+
+        // Whole pipeline이 custom thread pool에서 동작
+        // thenCombine, thenApply 등도 custom thread pool에서 동작
+        return helloFuture
+                .thenCombineAsync(worldFuture, (h, w) -> {
+                    log("inside thenCombine 1");
+                    return h + w;
+                }, executorService)
+                .thenCombineAsync(hiFuture, (hw, h) -> {
+                    log("inside thenCombine 2");
+                    return hw + " " + h;
+                }, executorService)
+                .thenApplyAsync(s -> {
+                    log("inside thenApply");
+                    return s.toUpperCase();
+                }, executorService)
                 .join();
     }
 

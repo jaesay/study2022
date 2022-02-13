@@ -86,12 +86,51 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
     }
 
     @Test
+    void combine_3_async_calls_log_async() {
+        //given
+        startTimer();
+
+        // when
+        String result = example.combine_3_async_calls_log_async();
+
+        // then
+        assertEquals("HELLO WORLD! HI", result);
+        timeTaken();
+    }
+
+    @Test
     void combine_3_async_calls_customThreadPool() {
         //given
         startTimer();
 
         // when
         String result = example.combine_3_async_calls_customThreadPool();
+
+        // then
+        assertEquals("HELLO WORLD! HI", result);
+        timeTaken();
+    }
+
+    @Test
+    void combine_3_async_calls_customThreadPool_async() {
+        //given
+        startTimer();
+
+        // when
+        String result = example.combine_3_async_calls_customThreadPool_async();
+
+        // then
+        assertEquals("HELLO WORLD! HI", result);
+        timeTaken();
+    }
+
+    @Test
+    void combine_3_async_calls_customThreadPool_async_2() {
+        //given
+        startTimer();
+
+        // when
+        String result = example.combine_3_async_calls_customThreadPool_async_2();
 
         // then
         assertEquals("HELLO WORLD! HI", result);
