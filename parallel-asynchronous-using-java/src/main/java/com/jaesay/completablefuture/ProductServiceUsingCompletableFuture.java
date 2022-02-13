@@ -93,10 +93,24 @@ public class ProductServiceUsingCompletableFuture {
                     productInfo.setProductOptions(productOptions); // 동기화 문제는 고려 X
                     return productInfo;
                 });
-        CompletableFuture<Review> reviewCompletableFuture = CompletableFuture.supplyAsync(() -> reviewService.retrieveReviews(productId));
+
+        CompletableFuture<Review> reviewCompletableFuture = CompletableFuture
+                .supplyAsync(() -> reviewService.retrieveReviews(productId))
+                .exceptionally(e -> {
+                    log("Exception in Review Service : " + e.getMessage());
+                    return Review.builder()
+                            .noOfReviews(0).overallRating(0.0)
+                            .build();
+                });
 
         Product product = productInfoCompletableFuture
                 .thenCombine(reviewCompletableFuture, (productInfo, review) -> new Product(productId, productInfo, review))
+                .whenComplete((p, e) -> {
+                    log("product in WhenComplete : " + p);
+                    if (e != null) {
+                        log("Exception in WhenComplete : " + e.getMessage());
+                    }
+                })
                 .join();
 
         timeTaken();
@@ -106,6 +120,11 @@ public class ProductServiceUsingCompletableFuture {
     private List<ProductOption> updateInventory_v2(ProductInfo productInfo) {
         List<CompletableFuture<ProductOption>> completableFutures = productInfo.getProductOptions().stream()
                 .map(productOption -> CompletableFuture.supplyAsync(() -> inventoryService.addInventory(productOption))
+                        .exceptionally((ex) -> {
+                            log("Exception in Inventory Service : " + ex.getMessage());
+                            return Inventory.builder()
+                                    .count(0).build();
+                        })
                         .thenApply(inventory -> {
                             productOption.setInventory(inventory); // 동기화 문제는 고려 X
                             return productOption;
