@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
 
-import static com.jaesay.util.CommonUtil.startTimer;
-import static com.jaesay.util.CommonUtil.timeTaken;
+import static com.jaesay.util.CommonUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleCompletableFutureExampleUsingHelloWorldTest {
@@ -23,11 +22,11 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         CompletableFuture<String> completableFuture = example.helloWorld();
 
         // then
+        timeTaken(); // 1
         completableFuture
                 .thenAccept(result -> assertEquals("HELLO WORLD", result))
                 .join(); // join을 해야 backgound task(테스트)가 끝나기 전에 종료되지 않음
 
-        timeTaken(); // 1
     }
 
     @Test
@@ -39,8 +38,8 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_2_async_calls();
 
         // then
-        assertEquals("HELLO WORLD!", result);
         timeTaken(); // 1
+        assertEquals("HELLO WORLD!", result);
     }
 
     @Test
@@ -52,8 +51,8 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_3_async_calls();
 
         // then
-        assertEquals("HELLO WORLD! HI", result);
         timeTaken(); // 1
+        assertEquals("HELLO WORLD! HI", result);
     }
 
     @Test
@@ -65,11 +64,11 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         CompletableFuture<String> completableFuture = example.helloWorld_thenCombine();
 
         // then
+        timeTaken(); // 2
         completableFuture
                 .thenAccept(result -> assertEquals("HELLO WORLD!", result))
                 .join();
 
-        timeTaken(); // 2
     }
 
     @Test
@@ -81,8 +80,8 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_3_async_calls_log();
 
         // then
-        assertEquals("HELLO WORLD! HI", result);
         timeTaken();
+        assertEquals("HELLO WORLD! HI", result);
     }
 
     @Test
@@ -94,8 +93,8 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_3_async_calls_log_async();
 
         // then
-        assertEquals("HELLO WORLD! HI", result);
         timeTaken();
+        assertEquals("HELLO WORLD! HI", result);
     }
 
     @Test
@@ -107,8 +106,8 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_3_async_calls_customThreadPool();
 
         // then
-        assertEquals("HELLO WORLD! HI", result);
         timeTaken();
+        assertEquals("HELLO WORLD! HI", result);
     }
 
     @Test
@@ -120,8 +119,8 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_3_async_calls_customThreadPool_async();
 
         // then
-        assertEquals("HELLO WORLD! HI", result);
         timeTaken();
+        assertEquals("HELLO WORLD! HI", result);
     }
 
     @Test
@@ -133,7 +132,20 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         String result = example.combine_3_async_calls_customThreadPool_async_2();
 
         // then
-        assertEquals("HELLO WORLD! HI", result);
         timeTaken();
+        assertEquals("HELLO WORLD! HI", result);
+    }
+
+    @Test
+    void helloWorld_anyOf() {
+        //given
+        startTimer();
+
+        // when
+        String result = example.helloWorld_anyOf();
+
+        // then
+        timeTaken();
+        assertEquals("hello world", result);
     }
 }

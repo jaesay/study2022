@@ -42,8 +42,21 @@ public class MovieClient {
                 .collect(Collectors.toList());
 
         return movieFutures.stream()
-                .map(CompletableFuture::join)
+                .map(CompletableFuture::join) // background에서 실행되고 있긴 하지만 blocking calls
                 .collect(Collectors.toList());
+    }
+
+    public List<Movie> retrieveMovies_CF_allOf(List<Long> movieInfoIds) {
+        var movieFutures = movieInfoIds.stream()
+                .map(this::retrieveMovie_CF)
+                .collect(Collectors.toList());
+
+        var cfAllof = CompletableFuture.allOf(movieFutures.toArray(new CompletableFuture[movieFutures.size()])); // 모든 작업이 끝난 후
+
+        return cfAllof.thenApply(v -> movieFutures.stream()
+                        .map(CompletableFuture::join) // 바로 가져옴
+                        .collect(Collectors.toList()))
+                .join();
     }
 
     private MovieInfo invokeMovieInfoService(long movieInfoId) {

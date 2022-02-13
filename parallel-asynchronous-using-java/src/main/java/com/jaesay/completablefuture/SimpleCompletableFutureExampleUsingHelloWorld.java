@@ -3,12 +3,12 @@ package com.jaesay.completablefuture;
 import com.jaesay.service.HelloWorldService;
 import com.jaesay.util.LoggerUtil;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.jaesay.util.CommonUtil.*;
+import static com.jaesay.util.CommonUtil.delay;
 import static com.jaesay.util.LoggerUtil.log;
 
 public class SimpleCompletableFutureExampleUsingHelloWorld {
@@ -200,5 +200,36 @@ public class SimpleCompletableFutureExampleUsingHelloWorld {
         return CompletableFuture.supplyAsync(helloWorldService::hello)
                 .thenCompose(helloWorldService::worldFuture) // 응답 받은 후 실행 (dependent task)
                 .thenApply(String::toUpperCase);
+    }
+
+    public String helloWorld_anyOf() {
+        var dbCall = CompletableFuture.supplyAsync(() -> {
+            delay(1000);
+            log("respond db call");
+            return "hello world";
+        });
+
+        var restCall = CompletableFuture.supplyAsync(() -> {
+            delay(2000);
+            log("respond db rest call");
+            return "hello world";
+        });
+
+        var soapCall = CompletableFuture.supplyAsync(() -> {
+            delay(3000);
+            log("respond db soap call");
+            return "hello world";
+        });
+
+        List<CompletableFuture<String>> callFutures = List.of(dbCall, restCall, soapCall);
+
+        CompletableFuture<Object> cfAnyOf = CompletableFuture.anyOf(callFutures.toArray(new CompletableFuture[callFutures.size()]));
+
+        return (String) cfAnyOf.thenApply(v -> {
+            if (v instanceof String) {
+                return v;
+            }
+            return null;
+        }).join();
     }
 }

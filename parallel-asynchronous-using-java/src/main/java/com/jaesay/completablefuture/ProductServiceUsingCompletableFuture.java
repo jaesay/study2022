@@ -132,7 +132,7 @@ public class ProductServiceUsingCompletableFuture {
                 .collect(Collectors.toList());
 
         return completableFutures.stream()
-                .map(CompletableFuture::join) // 파이프라인에서 한개 씩 blocking 될 것 같지만 위에서 supplyAsync 로 CompletableFuture를 만들때 이미 백그라운드에서 실행
+                .map(CompletableFuture::join) // 파이프라인에서 한개 씩 blocking 되지만 위에서 supplyAsync 로 CompletableFuture를 만들때 이미 백그라운드에서 실행 => allof를 사용하여 즉시 받을 수 있음
                 .collect(Collectors.toList());
     }
 

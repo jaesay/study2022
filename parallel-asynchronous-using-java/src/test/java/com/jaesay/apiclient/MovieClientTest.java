@@ -78,4 +78,19 @@ class MovieClientTest {
         assert movies != null;
         assert movies.size() == 7;
     }
+
+    @RepeatedTest(10)
+    void retrieveMovies_CF_allOf() {
+        // given
+        var movieInfoIds = List.of(1L, 2L, 3L, 4L, 5L, 6L, 7L);
+        CommonUtil.startTimer();
+
+        // when
+        var movies = movieClient.retrieveMovies_CF_allOf(movieInfoIds);
+
+        // then
+        CommonUtil.timeTaken();
+        assert movies != null;
+        assert movies.size() == 7;
+    }
 }
