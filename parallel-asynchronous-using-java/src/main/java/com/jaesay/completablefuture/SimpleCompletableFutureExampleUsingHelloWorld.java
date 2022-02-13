@@ -4,6 +4,9 @@ import com.jaesay.service.HelloWorldService;
 import com.jaesay.util.LoggerUtil;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static com.jaesay.util.CommonUtil.*;
 import static com.jaesay.util.LoggerUtil.log;
@@ -56,6 +59,59 @@ public class SimpleCompletableFutureExampleUsingHelloWorld {
                 .thenCombine(worldFuture, (h, w) -> h + w)
                 .thenCombine(hiFuture, (hw, h) -> hw + " " + h)
                 .thenApply(String::toUpperCase)
+                .join();
+    }
+
+    public String combine_3_async_calls_log() {
+        // independent tasks
+        CompletableFuture<String> helloFuture = CompletableFuture.supplyAsync(helloWorldService::hello);
+        CompletableFuture<String> worldFuture = CompletableFuture.supplyAsync(helloWorldService::world);
+        CompletableFuture<String> hiFuture = CompletableFuture.supplyAsync(() -> {
+            delay(1000);
+            return "Hi";
+        });
+
+        return helloFuture
+                .thenCombine(worldFuture, (h, w) -> {
+                    log("inside thenCombine 1");
+                    return h + w;
+                })
+                .thenCombine(hiFuture, (hw, h) -> {
+                    log("inside thenCombine 2");
+                    return hw + " " + h;
+                })
+                .thenApply(s -> {
+                    log("inside thenApply");
+                    return s.toUpperCase();
+                })
+                .join();
+    }
+
+    public String combine_3_async_calls_customThreadPool() {
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+        CompletableFuture<String> helloFuture = CompletableFuture.supplyAsync(helloWorldService::hello, executorService);
+        CompletableFuture<String> worldFuture = CompletableFuture.supplyAsync(helloWorldService::world, executorService);
+        CompletableFuture<String> hiFuture = CompletableFuture.supplyAsync(() -> {
+            delay(1000);
+            return "Hi";
+        }, executorService);
+
+        // Whole pipeline이 custom thread pool에서 동작
+        // thenCombine, thenApply 등도 custom thread pool에서 동작
+        return helloFuture
+                .thenCombine(worldFuture, (h, w) -> {
+                    log("inside thenCombine 1");
+                    return h + w;
+                })
+                .thenCombine(hiFuture, (hw, h) -> {
+                    log("inside thenCombine 2");
+                    return hw + " " + h;
+                })
+                .thenApply(s -> {
+                    log("inside thenApply");
+                    return s.toUpperCase();
+                })
                 .join();
     }
 

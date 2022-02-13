@@ -72,4 +72,29 @@ class SimpleCompletableFutureExampleUsingHelloWorldTest {
         timeTaken(); // 2
     }
 
+    @Test
+    void combine_3_async_calls_log() {
+        //given
+        startTimer();
+
+        // when
+        String result = example.combine_3_async_calls_log();
+
+        // then
+        assertEquals("HELLO WORLD! HI", result);
+        timeTaken();
+    }
+
+    @Test
+    void combine_3_async_calls_customThreadPool() {
+        //given
+        startTimer();
+
+        // when
+        String result = example.combine_3_async_calls_customThreadPool();
+
+        // then
+        assertEquals("HELLO WORLD! HI", result);
+        timeTaken();
+    }
 }
