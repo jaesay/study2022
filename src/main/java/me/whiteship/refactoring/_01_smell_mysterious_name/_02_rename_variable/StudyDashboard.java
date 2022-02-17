@@ -25,10 +25,11 @@ public class StudyDashboard {
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
         GHIssue issue = repository.getIssue(30);
 
-        List<GHIssueComment> comments = issue.getComments();
-        for (GHIssueComment comment : comments) {
-            usernames.add(comment.getUserName());
-            this.reviews.add(comment.getBody());
+        // 선언부와 변수명이 다르다 => 더 적절한 한개로 통일
+        List<GHIssueComment> reviews = issue.getComments();
+        for (GHIssueComment review : reviews) {
+            usernames.add(review.getUserName());
+            this.reviews.add(review.getBody());
         }
     }
 
@@ -43,7 +44,8 @@ public class StudyDashboard {
     public static void main(String[] args) throws IOException {
         StudyDashboard studyDashboard = new StudyDashboard();
         studyDashboard.loadReviews();
-        studyDashboard.getUsernames().forEach(name -> System.out.println(name));
-        studyDashboard.getReviews().forEach(review -> System.out.println(review));
+        // 메소드 레퍼런스 또는 앞글자만 따서 (람다는 변수의 스콥이 좁고 안에 들어가는 데이터가 명확하기 떄문), 아니면 명시적으로
+        studyDashboard.getUsernames().forEach(System.out::println);
+        studyDashboard.getReviews().forEach(System.out::println);
     }
 }
