@@ -10,6 +10,10 @@ import java.util.Set;
 
 public class StudyDashboard {
 
+    // 코드 슬라이드를 하면
+    // 관련있는 코드끼리 옮기면 알지 못한 중복코드가 발견될 수도 있고 읽기도 훨씬 쉬워진다.
+    // 위에 몰아 정의하지말고 사용하는 코드 위에 변수를 정의하자
+    // Extract Function 전 단계
     private void printParticipants(int eventId) throws IOException {
         // Get github issue to check homework
         GitHub gitHub = GitHub.connect();
@@ -43,8 +47,5 @@ public class StudyDashboard {
         studyDashboard.printReviewers();
         studyDashboard.printParticipants(15);
     }
-
-
-
 
 }
