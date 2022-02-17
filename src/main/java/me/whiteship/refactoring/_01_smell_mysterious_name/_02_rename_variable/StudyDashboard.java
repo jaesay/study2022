@@ -25,7 +25,7 @@ public class StudyDashboard {
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
         GHIssue issue = repository.getIssue(30);
 
-        // 선언부와 변수명이 다르다 => 더 적절한 한개로 통일
+        // 선언부와 변수명이 다르다 => context 상 더 적절한 한개로 통일
         List<GHIssueComment> reviews = issue.getComments();
         for (GHIssueComment review : reviews) {
             usernames.add(review.getUserName());
