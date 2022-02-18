@@ -62,6 +62,7 @@ public class StudyDashboard {
     }
 
     private Participant findParticipant(String username, List<Participant> participants) {
+        // 조건과 액션 모두 의도를 표현해야 한다.
         return isNewParticipant(username, participants) ?
                 createNewParticipant(username, participants) :
                 findExistingParticipant(username, participants);

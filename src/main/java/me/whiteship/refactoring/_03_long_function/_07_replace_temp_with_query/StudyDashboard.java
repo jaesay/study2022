@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 
 public class StudyDashboard {
 
+    // 함수의 이름만 읽어도 코드의 의미를 파악할 수 있을 것이기 때문에 어떻게 구현되어 있는지 파악하기 위한 문맥 전환이 많이 필요 없다.
+    // 컴파일할 때 바이트 코드를 처리할 때 최적화가 이뤄지기 때문에 call stack overhead까지 고민할 필요는 없다.
     public static void main(String[] args) throws IOException, InterruptedException {
         StudyDashboard studyDashboard = new StudyDashboard();
         studyDashboard.print();
@@ -27,6 +29,7 @@ public class StudyDashboard {
         GHRepository repository = gitHub.getRepository("whiteship/live-study");
         List<Participant> participants = new CopyOnWriteArrayList<>();
 
+        // 15개의 이벤트를 돌면서 댓글을 파악하면서 참여했는지 안했는지 데이터를 쌓아놓음
         int totalNumberOfEvents = 15;
         ExecutorService service = Executors.newFixedThreadPool(8);
         CountDownLatch latch = new CountDownLatch(totalNumberOfEvents);
@@ -65,6 +68,7 @@ public class StudyDashboard {
         latch.await();
         service.shutdown();
 
+        // 마크다운으로 출력
         try (FileWriter fileWriter = new FileWriter("participants.md");
              PrintWriter writer = new PrintWriter(fileWriter)) {
             participants.sort(Comparator.comparing(Participant::username));
@@ -72,15 +76,25 @@ public class StudyDashboard {
             writer.print(header(totalNumberOfEvents, participants.size()));
 
             participants.forEach(p -> {
-                long count = p.homework().values().stream()
-                        .filter(v -> v == true)
-                        .count();
-                double rate = count * 100 / totalNumberOfEvents;
-
-                String markdownForHomework = String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), rate);
+                String markdownForHomework = getMarkdownForParticipant(totalNumberOfEvents, p);
                 writer.print(markdownForHomework);
             });
         }
+    }
+
+    // 추출한 메소드의 파라메터를 가지고 파악할 수 있는 정보라면 함수로 뺴내고 파라메터를 줄일 수가 있다.
+    // Replace temp with query
+    // e.g rate 메서드
+    private String getMarkdownForParticipant(int totalNumberOfEvents, Participant p) {
+        return String.format("| %s %s | %.2f%% |\n", p.username(), checkMark(p, totalNumberOfEvents), getRate(totalNumberOfEvents, p));
+    }
+
+    private double getRate(int totalNumberOfEvents, Participant p) {
+        long count = p.homework().values().stream()
+                .filter(v -> v == true)
+                .count();
+        double rate = count * 100 / totalNumberOfEvents;
+        return rate;
     }
 
     /**
