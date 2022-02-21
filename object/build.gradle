@@ -1,11 +1,8 @@
-subprojects {
-    apply plugin: 'java'
+apply plugin: 'java'
 
-    group 'org.jaesay'
-    version '1.0-SNAPSHOT'
+group 'org.jaesay'
+version '1.0-SNAPSHOT'
 
-    repositories {
-        mavenCentral()
-    }
+repositories {
+    mavenCentral()
 }
-
