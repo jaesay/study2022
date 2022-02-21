@@ -1,4 +1,4 @@
-package chapter02;
+package org.jaesay.chapter02;
 
 // 협력(collaboration): 시스템의 어떤 기능을 구현하기 위해 객체들 사이에 이뤄지는 상호작용
 public class Reservation {

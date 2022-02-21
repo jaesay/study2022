@@ -1,4 +1,4 @@
-package chapter02;
+package org.jaesay.chapter02;
 
 public class AmountDiscountPolicy extends DiscountPolicy {
     private Money discountAmount;

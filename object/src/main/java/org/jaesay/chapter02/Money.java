@@ -1,4 +1,4 @@
-package chapter02;
+package org.jaesay.chapter02;
 
 import java.math.BigDecimal;
 

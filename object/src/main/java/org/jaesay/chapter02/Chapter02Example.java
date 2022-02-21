@@ -1,4 +1,4 @@
-package chapter02;
+package org.jaesay.chapter02;
 
 import java.time.DayOfWeek;
 import java.time.Duration;

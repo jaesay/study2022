@@ -1,4 +1,4 @@
-package chapter02;
+package org.jaesay.chapter02;
 
 // 할인 요금을 계산할 책임을 그대로 DiscountPolicy 계층에 유지시킬 수 있다.
 public class NoneDiscountPolicy extends DiscountPolicy {
