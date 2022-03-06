@@ -1,4 +1,4 @@
-package org.jaesay.schedulemanagement.style1;
+package org.jaesay.chapter06.example1;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
