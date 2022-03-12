@@ -1,13 +1,29 @@
 import {Component} from "react";
+import content from "./Content";
 
 class Toc extends Component {
     render() {
+        let list = [];
+        const data = this.props.data;
+        let i = 0;
+        while(i < data.length) {
+            list.push(
+                <li key={data[i].id}>
+                    <a
+                        href={"/content" + data[i].id}
+                        data-id={data[i].id}
+                        onClick={function (e) {
+                            e.preventDefault();
+                            this.props.onChangePage(e.target.dataset.id);
+                        }.bind(this)}
+                    >{data[i].title}</a>
+                </li>)
+            i = i + 1;
+        }
         return (
             <nav>
                 <ul>
-                    <li><a href="">HTML</a></li>
-                    <li><a href="">CSS</a></li>
-                    <li><a href="">JavaScript</a></li>
+                    {list}
                 </ul>
             </nav>
         );
