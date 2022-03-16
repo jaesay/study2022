@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"chapter8.item56","c":"Suspect","l":"indexTest()"},{"p":"chapter8.item56","c":"Suspect","l":"Suspect()","u":"%3Cinit%3E()"},{"p":"chapter8.item56","c":"Suspect","l":"test(int, int)","u":"test(int,int)"},{"p":"chapter8.item56","c":"Suspect","l":"testWithoutComments(int, int)","u":"testWithoutComments(int,int)"}];updateSearchResults();
