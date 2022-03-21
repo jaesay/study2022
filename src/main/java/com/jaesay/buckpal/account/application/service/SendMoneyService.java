@@ -1,4 +1,4 @@
-package com.jaesay.buckpal.account.application.port;
+package com.jaesay.buckpal.account.application.service;
 
 import com.jaesay.buckpal.account.application.port.in.SendMoneyCommand;
 import com.jaesay.buckpal.account.application.port.in.SendMoneyUseCase;
