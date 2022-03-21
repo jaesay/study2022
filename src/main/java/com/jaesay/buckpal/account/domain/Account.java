@@ -1,5 +1,7 @@
 package com.jaesay.buckpal.account.domain;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Value;
 
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 /**
  * 실제 계좌의 snapshot 을 제공한다.
  */
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
 
     @Getter
@@ -23,7 +26,15 @@ public class Account {
      * 한 계좌에 대한 며칠 혹은 몇 주간의 범위에 해당하는 활동만 보유한다.
      */
     @Getter
-    private ActivityWindow activityWindow;
+    private final ActivityWindow activityWindow;
+
+    public static Account withoutId(Money baselineBalance, ActivityWindow activityWindow) {
+        return new Account(null, baselineBalance, activityWindow);
+    }
+
+    public static Account withId(AccountId accountId, Money baselineBalance, ActivityWindow activityWindow) {
+        return new Account(accountId, baselineBalance, activityWindow);
+    }
 
     public Money calculateBalance() {
         return Money.add(this.baselineBalance, this.activityWindow.calculateBalance(this.id));
@@ -54,6 +65,6 @@ public class Account {
 
     @Value
     public static class AccountId {
-        private final Long value;
+        private Long value;
     }
 }

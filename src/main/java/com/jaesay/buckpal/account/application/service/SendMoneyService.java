@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
-@Transactional
+@Transactional // 트랜잭션 책임을 영속성 어댑터 호출을 관장하는 서비스에 위임
 public class SendMoneyService implements SendMoneyUseCase {
 
     private final LoadAccountPort loadAccountPort;
