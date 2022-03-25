@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Value;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * 실제 계좌의 snapshot 을 제공한다.
@@ -13,7 +14,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Account {
 
-    @Getter
+    /**
+     * 계좌 ID
+     */
     private AccountId id;
 
     /**
@@ -27,6 +30,10 @@ public class Account {
      */
     @Getter
     private final ActivityWindow activityWindow;
+
+    public Optional<AccountId> getId(){
+        return Optional.ofNullable(this.id);
+    }
 
     public static Account withoutId(Money baselineBalance, ActivityWindow activityWindow) {
         return new Account(null, baselineBalance, activityWindow);
