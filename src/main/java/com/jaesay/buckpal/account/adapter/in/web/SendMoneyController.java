@@ -4,11 +4,13 @@ import com.jaesay.buckpal.account.application.port.in.SendMoneyCommand;
 import com.jaesay.buckpal.account.application.port.in.SendMoneyUseCase;
 import com.jaesay.buckpal.account.domain.Account;
 import com.jaesay.buckpal.account.domain.Money;
+import com.jaesay.buckpal.common.WebAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@WebAdapter
 @RestController
 @RequiredArgsConstructor
 class SendMoneyController {
