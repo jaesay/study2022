@@ -61,7 +61,7 @@ public class Account {
     }
 
     private boolean mayWithdraw(Money money) {
-        return Money.add(this.calculateBalance(), money.negate()).isPositive();
+        return Money.add(this.calculateBalance(), money.negate()).isPositiveOrZero();
     }
 
     public boolean deposit(Money money, AccountId sourceAccountId) {
