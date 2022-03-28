@@ -13,10 +13,8 @@ public class ShippingInfoChangedEvent {
     private LocalDateTime createdAt; // 이벤트 발생시간
     private ShippingInfo newShippingInfo; // 추가 데이터
 
-    /* Constructor */
     public ShippingInfoChangedEvent() {}
 
-    /* Static Factory Method */
     public static ShippingInfoChangedEvent create(long orderId, ShippingInfo shippingInfo) {
         ShippingInfoChangedEvent event = new ShippingInfoChangedEvent();
         event.orderId = orderId;

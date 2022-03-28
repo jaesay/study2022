@@ -22,17 +22,14 @@ public class OrderProductEntity {
     @Embedded
     private OrderProduct orderProduct;
 
-    /* Constructor */
     protected OrderProductEntity() {}
 
-    /* Static Factory Method */
     public static OrderProductEntity from(OrderProduct orderProduct) {
         OrderProductEntity orderProductEntity = new OrderProductEntity();
         orderProductEntity.orderProduct = orderProduct;
         return orderProductEntity;
     }
 
-    /* Relationship Method */
     void setOrder(OrderEntity order) {
         this.order = order;
     }

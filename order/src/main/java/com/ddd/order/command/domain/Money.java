@@ -11,12 +11,10 @@ import java.util.Objects;
 public class Money {
     private BigDecimal value;
 
-    /* Constructor */
     public Money(BigDecimal value) {
         this.value = value;
     }
 
-    /* Business Logic */
     public Money multiply(int multiplier) {
         return new Money(value.multiply(BigDecimal.valueOf(multiplier)));
     }
@@ -33,7 +31,6 @@ public class Money {
         return new Money(value.subtract(money.value));
     }
 
-    /* Override Method*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
