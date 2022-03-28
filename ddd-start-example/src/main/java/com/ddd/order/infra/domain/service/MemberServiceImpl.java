@@ -1,5 +1,6 @@
 package com.ddd.order.infra.domain.service;
 
+import com.ddd.order.command.domain.Canceller;
 import com.ddd.order.command.domain.Orderer;
 import com.ddd.order.command.domain.MemberService;
 import com.ddd.order.common.DomainService;
@@ -23,6 +24,19 @@ public class MemberServiceImpl implements MemberService {
             throw new RuntimeException("member not found");
         }
         return toOrderer(member);
+    }
+
+    @Override
+    public Canceller findCanceller(long memberId) {
+        MemberDto member = memberClient.getMember(memberId);
+        if (member == null) {
+            throw new RuntimeException("member not found");
+        }
+        return toCanceller(member);
+    }
+
+    private Canceller toCanceller(MemberDto member) {
+        return new Canceller(member.getMemberId());
     }
 
     // 복잡할 시 mapper/translator/converter 등 별도 클래스 만들고 변환 처리

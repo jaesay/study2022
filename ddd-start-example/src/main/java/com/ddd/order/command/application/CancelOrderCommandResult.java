@@ -9,10 +9,8 @@ public class CancelOrderCommandResult {
     private long orderId;
     // ...
 
-    /* Constructor */
     private CancelOrderCommandResult() {}
 
-    /* Static Factory Method */
     public static CancelOrderCommandResult from(OrderEntity entity) {
         CancelOrderCommandResult result = new CancelOrderCommandResult();
         result.orderId = entity.getId();
