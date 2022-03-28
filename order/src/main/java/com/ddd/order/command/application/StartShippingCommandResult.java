@@ -1,6 +1,6 @@
-package com.ddd.order.application.command;
+package com.ddd.order.command.application;
 
-import com.ddd.order.domain.model.OrderEntity;
+import com.ddd.order.command.domain.OrderEntity;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -9,10 +9,8 @@ public class StartShippingCommandResult {
     private long orderId;
     // ...
 
-    /* Constructor */
     private StartShippingCommandResult() {}
 
-    /* Static Factory Method */
     public static StartShippingCommandResult from(OrderEntity entity) {
         StartShippingCommandResult result = new StartShippingCommandResult();
         result.orderId = entity.getId();

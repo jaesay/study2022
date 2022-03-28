@@ -1,4 +1,4 @@
-package com.ddd.order.domain.model;
+package com.ddd.order.command.domain;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -17,10 +17,8 @@ public class Receiver {
     @Column(name = "receiver_phone")
     private String phone;
 
-    /* Constructor */
     protected Receiver() {}
 
-    /* Static Factory Method */
     public static Receiver create(String name, String phone) {
         Receiver receiver = new Receiver();
         receiver.name = name;

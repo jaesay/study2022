@@ -1,4 +1,4 @@
-package com.ddd.order.domain.event;
+package com.ddd.order.command.domain;
 
 import lombok.Getter;
 

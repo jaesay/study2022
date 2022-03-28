@@ -1,8 +1,8 @@
 package com.ddd.order.presentation;
 
-import com.ddd.order.application.command.PlaceOrderCommand;
-import com.ddd.order.application.command.PlaceOrderCommand.OrderProductCommand;
-import com.ddd.order.application.command.PlaceOrderCommand.ShippingInfoCommand;
+import com.ddd.order.command.application.PlaceOrderCommand;
+import com.ddd.order.command.application.PlaceOrderCommand.OrderProductCommand;
+import com.ddd.order.command.application.PlaceOrderCommand.ShippingInfoCommand;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

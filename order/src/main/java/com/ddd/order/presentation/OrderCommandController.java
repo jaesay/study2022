@@ -1,6 +1,6 @@
 package com.ddd.order.presentation;
 
-import com.ddd.order.application.command.*;
+import com.ddd.order.command.application.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

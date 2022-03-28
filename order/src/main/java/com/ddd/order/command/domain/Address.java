@@ -1,4 +1,4 @@
-package com.ddd.order.domain.model;
+package com.ddd.order.command.domain;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -20,10 +20,8 @@ public class Address {
     @Column(name = "address2")
     private String address2;
 
-    /* Constructor */
     protected Address() {}
 
-    /* Static Factory Method */
     public static Address create(String zipCode, String address1, String address2) {
         Address address = new Address();
         address.zipCode = zipCode;

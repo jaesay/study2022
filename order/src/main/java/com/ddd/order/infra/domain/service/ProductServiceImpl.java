@@ -1,8 +1,8 @@
 package com.ddd.order.infra.domain.service;
 
-import com.ddd.order.domain.model.OrderProduct;
-import com.ddd.order.domain.service.ProductService;
-import com.ddd.order.domain.support.annotation.DomainService;
+import com.ddd.order.command.domain.OrderProduct;
+import com.ddd.order.command.domain.ProductService;
+import com.ddd.order.common.DomainService;
 import com.ddd.order.infra.client.ProductClient;
 import com.ddd.order.infra.client.ProductDto;
 

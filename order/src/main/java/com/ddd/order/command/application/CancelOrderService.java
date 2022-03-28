@@ -1,7 +1,7 @@
-package com.ddd.order.application.command;
+package com.ddd.order.command.application;
 
-import com.ddd.order.domain.model.OrderEntity;
-import com.ddd.order.domain.service.RefundService;
+import com.ddd.order.command.domain.OrderEntity;
+import com.ddd.order.command.domain.RefundService;
 import com.ddd.order.infra.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 

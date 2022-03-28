@@ -1,4 +1,4 @@
-package com.ddd.order.domain.model;
+package com.ddd.order.command.domain;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -18,10 +18,8 @@ public class Orderer {
     @Column(name = "orderer_name")
     private String name;
 
-    /* Constructor */
     protected Orderer() {}
 
-    /* Static Factory Method */
     public static Orderer create(Long memberId, String name) {
         Orderer orderer = new Orderer();
         orderer.memberId = memberId;

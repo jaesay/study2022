@@ -1,10 +1,10 @@
-package com.ddd.order.application.command;
+package com.ddd.order.command.application;
 
-import com.ddd.order.application.command.PlaceOrderCommand.ShippingInfoCommand;
-import com.ddd.order.domain.model.*;
-import com.ddd.order.domain.service.DiscountCalculationService;
-import com.ddd.order.domain.service.MemberService;
-import com.ddd.order.domain.service.ProductService;
+import com.ddd.order.command.application.PlaceOrderCommand.ShippingInfoCommand;
+import com.ddd.order.command.domain.*;
+import com.ddd.order.command.domain.DiscountCalculationService;
+import com.ddd.order.command.domain.MemberService;
+import com.ddd.order.command.domain.ProductService;
 import com.ddd.order.infra.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class PlaceOrderService {
 
-    private final OrderRepository repository;
+    private final OrderRepository repository; // 1. 포트/어댑터 로.. 2. 래퍼 클래스(컴포지션)으로..결국 1번과 비슷할것같다..
     private final DiscountCalculationService discountCalculationService;
     private final MemberService memberService;
     private final ProductService productService;

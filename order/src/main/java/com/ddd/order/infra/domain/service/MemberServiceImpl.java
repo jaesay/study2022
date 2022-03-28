@@ -1,8 +1,8 @@
 package com.ddd.order.infra.domain.service;
 
-import com.ddd.order.domain.model.Orderer;
-import com.ddd.order.domain.service.MemberService;
-import com.ddd.order.domain.support.annotation.DomainService;
+import com.ddd.order.command.domain.Orderer;
+import com.ddd.order.command.domain.MemberService;
+import com.ddd.order.common.DomainService;
 import com.ddd.order.infra.client.MemberClient;
 import com.ddd.order.infra.client.MemberDto;
 

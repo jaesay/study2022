@@ -1,6 +1,6 @@
 package com.ddd.order.infra;
 
-import com.ddd.order.domain.model.*;
+import com.ddd.order.command.domain.*;
 import com.ddd.order.infra.repository.OrderRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

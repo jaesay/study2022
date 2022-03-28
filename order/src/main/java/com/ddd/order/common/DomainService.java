@@ -1,4 +1,4 @@
-package com.ddd.order.domain.support.annotation;
+package com.ddd.order.common;
 
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.ddd.order.domain.model;
+package com.ddd.order.command.domain;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -25,10 +25,8 @@ public class ShippingInfo {
     @Embedded
     private Receiver receiver;
 
-    /* Constructor */
     protected ShippingInfo() {}
 
-    /* Static Factory Method*/
     public static ShippingInfo create(Address address, String message, Receiver receiver) {
         ShippingInfo shippingInfo = new ShippingInfo();
         shippingInfo.address = address;

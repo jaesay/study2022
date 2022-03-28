@@ -1,4 +1,4 @@
-package com.ddd.order.application.command;
+package com.ddd.order.command.application;
 
 import lombok.Getter;
 import lombok.Setter;

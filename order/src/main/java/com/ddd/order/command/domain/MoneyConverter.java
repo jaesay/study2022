@@ -1,4 +1,4 @@
-package com.ddd.order.domain.model;
+package com.ddd.order.command.domain;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

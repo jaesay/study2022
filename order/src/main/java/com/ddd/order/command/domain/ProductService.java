@@ -1,6 +1,6 @@
-package com.ddd.order.domain.service;
+package com.ddd.order.command.domain;
 
-import com.ddd.order.domain.model.OrderProduct;
+import com.ddd.order.command.domain.OrderProduct;
 
 public interface ProductService {
     OrderProduct findOrderProduct(long productId, int quantity);

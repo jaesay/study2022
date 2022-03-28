@@ -1,8 +1,8 @@
 package com.ddd.order.infra.domain.service;
 
-import com.ddd.order.domain.event.OrderCanceledEvent;
-import com.ddd.order.domain.service.RefundService;
-import com.ddd.order.domain.support.annotation.DomainService;
+import com.ddd.order.command.domain.OrderCanceledEvent;
+import com.ddd.order.command.domain.RefundService;
+import com.ddd.order.common.DomainService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

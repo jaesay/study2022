@@ -1,6 +1,5 @@
-package com.ddd.order.domain.event;
+package com.ddd.order.command.domain;
 
-import com.ddd.order.domain.model.ShippingInfo;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

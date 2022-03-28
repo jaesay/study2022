@@ -1,6 +1,5 @@
-package com.ddd.order.domain.model;
+package com.ddd.order.command.domain;
 
-import com.ddd.order.domain.service.DiscountCalculationService;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
@@ -51,10 +50,8 @@ public class OrderEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    /* Constructor */
     protected OrderEntity() {}
 
-    /* Static Factory Method*/
     public static OrderEntity create(Orderer orderer, List<OrderProduct> orderProducts, ShippingInfo shippingInfo) {
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setOrderer(orderer);
@@ -64,13 +61,11 @@ public class OrderEntity {
         return orderEntity;
     }
 
-    /* Relationship Method */
     public void addOrderProducts(OrderProductEntity orderProductEntity) {
         orderProducts.add(orderProductEntity);
         orderProductEntity.setOrder(this);
     }
 
-    /* Setter */
     private void setOrderer(Orderer orderer) {
         if (orderer == null) throw new IllegalArgumentException("no orderer");
         this.orderer = orderer;

@@ -1,6 +1,6 @@
-package com.ddd.order.application.command;
+package com.ddd.order.command.application;
 
-import com.ddd.order.domain.model.*;
+import com.ddd.order.command.domain.*;
 import lombok.Getter;
 import lombok.ToString;
 

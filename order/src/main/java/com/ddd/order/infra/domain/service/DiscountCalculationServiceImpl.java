@@ -1,9 +1,9 @@
 package com.ddd.order.infra.domain.service;
 
-import com.ddd.order.domain.model.Money;
-import com.ddd.order.domain.model.OrderEntity;
-import com.ddd.order.domain.service.DiscountCalculationService;
-import com.ddd.order.domain.support.annotation.DomainService;
+import com.ddd.order.command.domain.Money;
+import com.ddd.order.command.domain.OrderEntity;
+import com.ddd.order.command.domain.DiscountCalculationService;
+import com.ddd.order.common.DomainService;
 import com.ddd.order.infra.client.MemberClient;
 import com.ddd.order.infra.client.MemberDto;
 
