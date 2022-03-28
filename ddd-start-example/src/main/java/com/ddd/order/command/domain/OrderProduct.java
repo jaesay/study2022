@@ -23,10 +23,8 @@ public class OrderProduct {
     @Column(name = "amounts")
     private Money amounts;
 
-    /* Constructor */
     protected OrderProduct() {}
 
-    /* Static Factory Method */
     public static OrderProduct create(Long productId, Money price, int quantity) {
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.productId = productId;
@@ -36,7 +34,6 @@ public class OrderProduct {
         return orderProduct;
     }
 
-    /* Business Logic */
     private void calculateAmounts() {
         this.amounts = price.multiply(quantity);
     }

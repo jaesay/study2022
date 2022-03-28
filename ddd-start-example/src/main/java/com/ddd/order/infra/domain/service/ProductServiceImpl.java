@@ -7,7 +7,7 @@ import com.ddd.order.infra.client.ProductClient;
 import com.ddd.order.infra.client.ProductDto;
 
 // TODO 이름 Impl 말고 다른거 없는지?
-@DomainService // 도메인 서비스: 외부 시스템의 모델과 현재 도메인 모델간의 변환을 책임
+@DomainService // 외부 시스템의 모델과 현재 도메인 모델간의 변환을 책임
 public class ProductServiceImpl implements ProductService {
     private final ProductClient productClient;
 

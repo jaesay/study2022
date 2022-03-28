@@ -5,7 +5,7 @@ import com.ddd.order.command.domain.Canceller;
 import com.ddd.order.command.domain.OrderEntity;
 import com.ddd.order.common.DomainService;
 
-@DomainService
+@DomainService // 한 애그리거트에 넣기 애매한 도메인 기능을 도메인 서비스로 구현
 public class SecurityCancelPolicy implements CancelPolicy {
 
     @Override
