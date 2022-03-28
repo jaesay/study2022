@@ -34,9 +34,6 @@ public class OrderEntity {
     @Column(name = "total_amounts")
     private Money totalAmounts;
 
-    @Column(name = "payment_amounts")
-    private Money paymentAmounts;
-
     @Embedded
     private ShippingInfo shippingInfo;
 
@@ -92,11 +89,6 @@ public class OrderEntity {
         this.totalAmounts = new Money(orderProducts.stream()
                 .map(orderProductEntity -> orderProductEntity.getOrderProduct().getAmounts().getValue())
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
-    }
-
-    public void calculatePaymentAmounts(DiscountCalculationService discountCalculationService) {
-        Money discountAmounts = discountCalculationService.calculateDiscountAmounts(this);
-        this.paymentAmounts = totalAmounts.minus(discountAmounts);
     }
 
     public void startShipping() {
