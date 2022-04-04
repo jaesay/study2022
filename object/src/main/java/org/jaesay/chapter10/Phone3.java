@@ -19,7 +19,7 @@ public abstract class Phone3 {
             result = result.plus(calculateCallFee(call));
         }
 
-        return result;
+        return result.plus(result.times(taxRate));
     }
 
     abstract protected Money calculateCallFee(Call call);
