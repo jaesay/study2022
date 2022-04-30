@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.2/redux.min.js"></script>
+</head>
+<body>
+<style>
+    .container {
+        border: 5px solid black;
+        padding: 1rem;
+        margin-bottom:1rem;
+    }
+    body{
+        margin:1rem;
+    }
+</style>
+<h1>With redux</h1>
+<div id="red"></div>
+<div id="blue"></div>
+<div id="green"></div>
+<script>
+    // 현재 상태와 action을 전달 후 새로 생성된 state를 반환
+    function reducer(state, action) {
+        if (state === undefined) {
+            return {color: 'yellow'};
+        }
+        var newState;
+        if (action.type === 'CHANGE_COLOR') {
+            newState = Object.assign({}, state, {color: action.color}); // immutable
+        }
+        console.log(action.type, action, state, newState);
+        return newState;
+    }
+    var store = Redux.createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+    function red() {
+        var state = store.getState();
+        document.querySelector('#red').innerHTML = `
+        <div class="container" id="component_red" style="background-color:${state.color}">
+            <h1>red</h1>
+            <input type="button" value="fire" onclick="
+                store.dispatch({type:'CHANGE_COLOR', color:'red'}); // type을 전달해야 됨
+            ">
+        </div>
+    `;
+    }
+    store.subscribe(red);
+    red();
+
+    function blue() {
+        var state = store.getState();
+        document.querySelector('#blue').innerHTML = `
+        <div class="container" id="component_blue" style="background-color:${state.color}">
+            <h1>blue</h1>
+            <input type="button" value="fire" onclick="
+                store.dispatch({type:'CHANGE_COLOR', color:'blue'});
+            ">
+        </div>
+    `;
+    }
+    store.subscribe(blue);
+    blue();
+
+    function green() {
+        var state = store.getState();
+        document.querySelector('#green').innerHTML = `
+        <div class="container" id="component_green" style="background-color:${state.color}">
+            <h1>green</h1>
+            <input type="button" value="fire" onclick="
+                store.dispatch({type:'CHANGE_COLOR', color:'green'});
+            ">
+        </div>
+    `;
+    }
+    store.subscribe(green);
+    green();
+</script>
+</body>
+</html>
