@@ -4,8 +4,8 @@ public class Client {
 
     public static void main(String[] args) {
         Client client = new Client();
-        client.print(new WhiteShipFactory(), "whiteship", "jaesay@mail.com");
-        client.print(new BlackShipFactory(), "blackship", "jaesay@mail.com");
+        client.print(new WhiteshipFactory(), "whiteship", "jaesay@mail.com");
+        client.print(new BlackshipFactory(), "blackship", "jaesay@mail.com");
     }
 
     private void print(ShipFactory shipFactory, String name, String email) {
