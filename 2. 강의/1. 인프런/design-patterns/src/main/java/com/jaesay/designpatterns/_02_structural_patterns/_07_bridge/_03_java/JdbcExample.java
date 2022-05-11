@@ -8,8 +8,9 @@ import java.sql.Statement;
 public class JdbcExample {
 
     public static void main(String[] args) throws ClassNotFoundException {
-        Class.forName("org.h2.Driver");
+        Class.forName("org.h2.Driver"); // driver: implementation, h2 driver: concrete implementation
 
+        // Connection, DriverManager, Statement, ... => abstraction
         try (Connection conn = DriverManager.getConnection ("jdbc:h2:mem:~/test", "sa","")) {
             String sql =  "CREATE TABLE  ACCOUNT " +
                     "(id INTEGER not NULL, " +
