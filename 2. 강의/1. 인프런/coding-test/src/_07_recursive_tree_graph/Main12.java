@@ -2,7 +2,7 @@ package _07_recursive_tree_graph;
 
 import java.util.Scanner;
 
-public class Main11 {
+public class Main12 {
     private static int n;
     private static int m;
     private static int[][] graph;
