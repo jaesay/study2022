@@ -1,5 +1,6 @@
 package me.whiteship.refactoring._06_mutable_data._18_split_variable;
 
+import me.whiteship.refactoring._06_mutable_data._18_split_variable._02_after.Rectangle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

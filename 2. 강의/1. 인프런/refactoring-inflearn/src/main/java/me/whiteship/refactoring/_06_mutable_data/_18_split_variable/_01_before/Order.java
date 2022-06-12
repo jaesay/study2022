@@ -1,4 +1,4 @@
-package me.whiteship.refactoring._06_mutable_data._18_split_variable;
+package me.whiteship.refactoring._06_mutable_data._18_split_variable._01_before;
 
 public class Order {
 

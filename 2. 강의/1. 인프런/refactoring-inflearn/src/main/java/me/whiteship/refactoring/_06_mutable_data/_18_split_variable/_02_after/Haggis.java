@@ -1,4 +1,4 @@
-package me.whiteship.refactoring._06_mutable_data._18_split_variable;
+package me.whiteship.refactoring._06_mutable_data._18_split_variable._02_after;
 
 public class Haggis {
 
@@ -16,15 +16,15 @@ public class Haggis {
 
     public double distanceTravelled(int time) {
         double result;
-        double acc = primaryForce / mass;
+        final double primaryAcc = primaryForce / mass;
         int primaryTime = Math.min(time, delay);
-        result = 0.5 * acc * primaryTime * primaryTime;
+        result = 0.5 * primaryAcc * primaryTime * primaryTime;
 
         int secondaryTime = time - delay;
         if (secondaryTime > 0) {
-            double primaryVelocity = acc * delay;
-            acc = (primaryForce + secondaryForce) / mass;
-            result += primaryVelocity * secondaryTime + 0.5 * acc * secondaryTime + secondaryTime;
+            final double primaryVelocity = primaryAcc * delay;
+            final double secondaryAcc = (primaryForce + secondaryForce) / mass;
+            result += primaryVelocity * secondaryTime + 0.5 * secondaryAcc * secondaryTime + secondaryTime;
         }
 
         return result;
