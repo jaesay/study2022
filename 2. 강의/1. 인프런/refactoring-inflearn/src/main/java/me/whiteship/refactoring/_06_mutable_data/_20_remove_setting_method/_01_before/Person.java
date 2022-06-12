@@ -1,4 +1,4 @@
-package me.whiteship.refactoring._06_mutable_data._20_remove_setting_method;
+package me.whiteship.refactoring._06_mutable_data._20_remove_setting_method._01_before;
 
 public class Person {
 
