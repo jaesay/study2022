@@ -1,4 +1,4 @@
-package me.whiteship.refactoring._06_mutable_data._23_change_reference_to_value;
+package me.whiteship.refactoring._06_mutable_data._23_change_reference_to_value._01_before;
 
 public class TelephoneNumber {
 
