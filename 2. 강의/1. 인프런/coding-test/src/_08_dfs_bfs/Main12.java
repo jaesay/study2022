@@ -8,31 +8,39 @@ public class Main12 {
         int n = sc.nextInt(); // 6
         int m = sc.nextInt(); // 4
 
-        int[][] arr = new int[m + 1][n + 1];
-        List<Point> points = new ArrayList<>();
+        int[] dx = {1, 0, -1, 0};
+        int[] dy = {0, 1, 0, -1};
+        int[][] board = new int[m + 1][n + 1];
+        int[][] dis = new int[m + 1][n + 1];
+        Queue<Point> q = new LinkedList<>();
+
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                arr[i][j] = sc.nextInt();
-                if (arr[i][j] == 1) {
-                    points.add(new Point(i, j));
+                board[i][j] = sc.nextInt();
+                if (board[i][j] == 1) {
+                    q.add(new Point(i, j));
                 }
             }
         }
 
-        int[] dx = {1, 0, -1, 0};
-        int[] dy = {0, 1, 0, -1};
-        Queue<Point> q = new LinkedList<>();
-        for (Point point : points) {
-            q.add(point);
-        }
         while (!q.isEmpty()) {
             Point c = q.poll();
             for (int i = 0; i < 4; i++) {
                 int nx = c.x + dx[i];
                 int ny = c.y + dy[i];
-                if (nx >= 1 && ny >=1 && nx <= m && ny <= n && arr[nx][ny] == 0) {
-                    arr[nx][ny] = arr[c.x][c.y] + 1;
+                if (nx >= 1 && ny >= 1 && nx <= m && ny <= n && board[nx][ny] == 0) {
+                    board[nx][ny] = 1;
+                    dis[nx][ny] = dis[c.x][c.y] + 1;
                     q.add(new Point(nx, ny));
+                }
+            }
+        }
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (board[i][j] == 0) {
+                    System.out.println(-1);
+                    return;
                 }
             }
         }
@@ -40,15 +48,10 @@ public class Main12 {
         int answer = -1;
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
-                if (arr[i][j] == 0) {
-                    System.out.println(-1);
-                    return;
-                }
-
-                answer = Math.max(answer, arr[i][j]);
+                answer = Math.max(answer, dis[i][j]);
             }
         }
-        System.out.println(answer -1);
+        System.out.println(answer);
     }
 
     public static class Point {
