@@ -14,8 +14,8 @@ class ShipmentTest {
         Order orderFromWA = new Order(placedOn, "WA");
 
         Shipment shipment = new Shipment();
-        assertEquals(placedOn.plusDays(1), shipment.deliveryDate(orderFromWA, true));
-        assertEquals(placedOn.plusDays(2), shipment.deliveryDate(orderFromWA, false));
+        assertEquals(placedOn.plusDays(1), shipment.rushDeliveryDate(orderFromWA));
+        assertEquals(placedOn.plusDays(2), shipment.regularDeliveryDate(orderFromWA));
     }
 
 }
