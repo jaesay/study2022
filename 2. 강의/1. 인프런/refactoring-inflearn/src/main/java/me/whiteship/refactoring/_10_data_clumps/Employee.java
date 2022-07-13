@@ -3,19 +3,11 @@ package me.whiteship.refactoring._10_data_clumps;
 public class Employee {
 
     private String name;
+    private PhoneNumber personalPhoneNumber;
 
-    private String personalAreaCode;
-
-    private String personalNumber;
-
-    public Employee(String name, String personalAreaCode, String personalNumber) {
+    public Employee(String name, PhoneNumber personalPhoneNumber) {
         this.name = name;
-        this.personalAreaCode = personalAreaCode;
-        this.personalNumber = personalNumber;
-    }
-
-    public String personalPhoneNumber() {
-        return personalAreaCode + "-" + personalNumber;
+        this.personalPhoneNumber = personalPhoneNumber;
     }
 
     public String getName() {
@@ -26,19 +18,16 @@ public class Employee {
         this.name = name;
     }
 
-    public String getPersonalAreaCode() {
-        return personalAreaCode;
+    public PhoneNumber getPersonalPhoneNumber() {
+        return personalPhoneNumber;
     }
 
-    public void setPersonalAreaCode(String personalAreaCode) {
-        this.personalAreaCode = personalAreaCode;
+    public void setPersonalPhoneNumber(PhoneNumber personalPhoneNumber) {
+        this.personalPhoneNumber = personalPhoneNumber;
     }
 
-    public String getPersonalNumber() {
-        return personalNumber;
+    public String personalPhoneNumber() {
+        return personalPhoneNumber.toString();
     }
 
-    public void setPersonalNumber(String personalNumber) {
-        this.personalNumber = personalNumber;
-    }
 }
