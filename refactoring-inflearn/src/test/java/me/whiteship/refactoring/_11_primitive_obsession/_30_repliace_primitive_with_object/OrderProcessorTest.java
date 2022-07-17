@@ -12,10 +12,10 @@ class OrderProcessorTest {
     void numberOfHighPriorityOrders() {
         OrderProcessor orderProcessor = new OrderProcessor();
         long highPriorityOrders = orderProcessor.numberOfHighPriorityOrders(
-                List.of(new Order("low"),
-                        new Order("normal"),
-                        new Order("high"),
-                        new Order("rush")));
+                List.of(new Order(new Priority("low")),
+                        new Order(new Priority("normal")),
+                        new Order(new Priority("high")),
+                        new Order(new Priority("rush"))));
         assertEquals(2, highPriorityOrders);
     }
 
