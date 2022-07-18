@@ -5,31 +5,36 @@ import java.util.List;
 public class Employee {
 
     private String name;
+    private EmployeeType type;
 
-    private String type;
+    public Employee(String name, String typeValue) {
+        this.name = name;
+        this.type = employeeType(typeValue);
+    }
 
-    public Employee(String name, String type) {
-        this.validate(type);
+    public Employee(String name, EmployeeType type) {
         this.name = name;
         this.type = type;
     }
 
-    private void validate(String type) {
-        List<String> legalTypes = List.of("engineer", "manager", "salesman");
-        if (!legalTypes.contains(type)) {
-            throw new IllegalArgumentException(type);
+    private EmployeeType employeeType(String typeValue) {
+        switch (typeValue) {
+            case "engineer": return new Engineer();
+            case "manager": return new Manager();
+            case "salesman": return new Salesman();
+            default: throw new IllegalArgumentException(typeValue);
         }
     }
 
     public String capitalizedType() {
-        return this.type.substring(0, 1).toUpperCase() + this.type.substring(1).toLowerCase();
+        return this.type.capitalizedType();
     }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
-                ", type='" + type + '\'' +
+                ", type='" + type.toString() + '\'' +
                 '}';
     }
 }
