@@ -15,4 +15,5 @@ public class Reservation {
 
     private boolean paid;
 
+    private String courtNumber;
 }
