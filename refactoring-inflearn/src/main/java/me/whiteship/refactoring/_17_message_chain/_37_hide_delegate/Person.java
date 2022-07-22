@@ -21,4 +21,8 @@ public class Person {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
+    Person getManager() {
+        return getDepartment().getManager();
+    }
 }
