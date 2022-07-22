@@ -10,7 +10,7 @@ class PersonTest {
     void getManager() {
         Person nick = new Person("nick", null);
         Person keesun = new Person("keesun", new Department(nick));
-        assertEquals(nick, keesun.getManager());
+        assertEquals(nick, keesun.getDepartment().getManager());
     }
 
 }
