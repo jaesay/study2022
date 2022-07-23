@@ -8,14 +8,25 @@ public class Booking {
     protected Show show;
 
     protected LocalDateTime time;
+    protected PremiumDelegate premiumDelegate;
 
     public Booking(Show show, LocalDateTime time) {
         this.show = show;
         this.time = time;
     }
 
+    public static Booking createBooking(Show show, LocalDateTime time) {
+        return new Booking(show, time);
+    }
+
+    public static Booking createPremiumBooking(Show show, LocalDateTime time, PremiumExtra extra) {
+        Booking booking = Booking.createBooking(show, time);
+        booking.premiumDelegate = new PremiumDelegate(booking, extra);
+        return booking;
+    }
+
     public boolean hasTalkback() {
-        return this.show.hasOwnProperty("talkback") && !this.isPeakDay();
+        return (premiumDelegate != null) ? this.premiumDelegate.hasTalkback() : this.show.hasOwnProperty("talkback") && !this.isPeakDay();
     }
 
     protected boolean isPeakDay() {
@@ -26,7 +37,10 @@ public class Booking {
     public double basePrice() {
         double result = this.show.getPrice();
         if (this.isPeakDay()) result += Math.round(result * 0.15);
-        return result;
+        return (this.premiumDelegate != null) ? this.premiumDelegate.extendBasePrice(result) : result;
     }
 
+    public boolean hasDinner() {
+        return premiumDelegate != null && premiumDelegate.hasDinner();
+    }
 }
