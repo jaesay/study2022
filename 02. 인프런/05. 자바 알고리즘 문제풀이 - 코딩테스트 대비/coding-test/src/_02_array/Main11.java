@@ -21,19 +21,17 @@ public class Main11 {
         int answer = 0;
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
-            int sum = 0;
-            int[] check = new int[n];
-            check[i] = 1;
-            for (int j = 0; j < 5; j++) {
-                for (int k = 0; k < n; k++) {
-                    if (arr[i][j] == arr[k][j] && check[k] == 0) {
-                        sum++;
-                        check[k] = 1;
+            int cnt = 0;
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < 5; k++) {
+                    if (arr[i][k] == arr[j][k]) {
+                        cnt++;
+                        break;
                     }
                 }
             }
-            if (sum > max) {
-                max = sum;
+            if (cnt > max) {
+                max = cnt;
                 answer = i;
             }
         }
