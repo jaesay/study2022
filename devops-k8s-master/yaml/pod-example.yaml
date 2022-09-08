@@ -1,0 +1,14 @@
+# 쿠버네티스 API v1를 사용
+apiVersion: v1
+# 워크로드 종류
+kind: Pod
+metadata:
+  # 팟 이름
+  name: nginx
+spec:
+  containers:
+  # 생성할 컨테이너 정보
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
