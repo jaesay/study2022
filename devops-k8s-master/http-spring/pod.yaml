@@ -8,3 +8,16 @@ spec:
       image: jaesay/http-spring
       ports:
         - containerPort: 8080
+      livenessProbe:
+        httpGet:
+          port: 8080
+          path: /actuator/health/liveness
+        initialDelaySeconds: 10
+        periodSeconds: 3
+        failureThreshold: 2
+      readinessProbe:
+        httpGet:
+          port: 8080
+          path: /actuator/health/readiness
+        initialDelaySeconds: 10
+        periodSeconds: 3
