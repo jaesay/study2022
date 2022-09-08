@@ -1,4 +1,4 @@
-package com.jaesay.demodocker;
+package com.jaesay.httpspring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
