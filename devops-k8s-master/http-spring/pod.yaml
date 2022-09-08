@@ -2,6 +2,10 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: http-spring
+  labels:
+    app: http-spring
+    owner: jaesay
+    tier: backend
 spec:
   containers:
     - name: http-spring
