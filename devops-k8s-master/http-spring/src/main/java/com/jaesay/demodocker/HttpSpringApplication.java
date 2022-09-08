@@ -9,7 +9,7 @@ import java.net.InetAddress;
 
 @SpringBootApplication
 @RestController
-public class DemoDockerApplication {
+public class HttpSpringApplication {
 
     @RequestMapping("/")
     public String home() {
@@ -26,7 +26,7 @@ public class DemoDockerApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoDockerApplication.class, args);
+        SpringApplication.run(HttpSpringApplication.class, args);
     }
 
 }
