@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: http-spring
+spec:
+  replicas: 3
+  selector:
+    app: http-spring
+  template:
+    metadata:
+      name: http-spring
+      labels:
+        app: http-spring # selector 를 가지고 pod 개수를 체크하기 때문에 selector 와 동일해야 한다. 아니면 에러발생 (The ReplicationController "http-spring" is invalid: spec.template.metadata.labels: Invalid value: map[string]string{"app":"http-spring2"}: `selector` does not match template `labels`)
+    spec:
+      containers:
+        - name: http-spring
+          image: jaesay/http-spring
+          ports:
+            - containerPort: 8080
