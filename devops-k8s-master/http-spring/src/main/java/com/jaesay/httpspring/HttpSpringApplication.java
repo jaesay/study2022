@@ -22,7 +22,7 @@ public class HttpSpringApplication {
                 hostName = "Unknown";
             }
         }
-        return "Hello, " + hostName + " v2";
+        return "Hello, " + hostName + " v3";
     }
 
     public static void main(String[] args) {
