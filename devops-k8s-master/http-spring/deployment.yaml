@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-spring-deployment
+  labels:
+    app: http-spring
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: http-spring
+  template:
+    metadata:
+      labels:
+        app: http-spring
+    spec:
+      containers:
+        - name: http-spring
+          image: jaesay/http-spring:v1
+          ports:
+            - containerPort: 8080
