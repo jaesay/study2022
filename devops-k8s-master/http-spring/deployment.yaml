@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: http-spring
-          image: jaesay/http-spring:v3
+          image: jaesay/http-spring:v1
           ports:
             - containerPort: 8080
