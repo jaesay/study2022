@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-spring-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: http-spring
+  ports:
+    - port: 80
+      targetPort: 8080
