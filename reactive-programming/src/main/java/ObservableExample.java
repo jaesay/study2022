@@ -1,5 +1,7 @@
 import java.util.Observable;
 import java.util.Observer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SuppressWarnings("deprecation")
 public class ObservableExample {
@@ -8,14 +10,18 @@ public class ObservableExample {
     Observer observer = new Observer() {
       @Override
       public void update(Observable o, Object arg) {
-        System.out.println(arg);
+        System.out.println(Thread.currentThread().getName() + " " + arg);
       }
     };
 
     IntObservable observable = new IntObservable();
     observable.addObserver(observer);
 
-    observable.run();
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    executorService.execute(observable);
+
+    System.out.println(Thread.currentThread().getName() + " EXIT");
+    executorService.shutdown();
   }
 
   static class IntObservable extends Observable implements Runnable {

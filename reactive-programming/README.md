@@ -13,6 +13,7 @@ Duality: 두가지가 궁금적인 기능은 똑같은데 해당 기능을 반�
 - iterable ←→ observable (gof 옵저버 패턴)
 - iterable은 소스에서 pulling 방식 -`next()`
 - observable은 소스에서 밀어 넣어주는 방식
+- DATA method(void) <-> void method(DATA)
 
 Observer Pattern
 
@@ -24,6 +25,13 @@ Java 9에는 Reactive Streams을 표준 스펙으로 한 개발된 API가 JDK(Fl
 
 GOF의 옵저버 패턴과 같다…이름들이 달라서 헷갈린다고 한다..
 
+옵저버 패턴 장점
 Observable (소스 이벤트.. 데이터..)에 등록
+관심있어 하는 모든 옵저버한테 broadcast 할수 있다.
+별도의 쓰레드에서 비동기로 동작한 후 이벤트가 발생하면 결과정보를 가져올수있다.
 
 Observer는 여러개가 될수있다.,.
+
+
+나프다 김훈민 - MS는 RX를 왜 만들었을까?
+https://www.youtube.com/watch?v=3FKlYO4okts
