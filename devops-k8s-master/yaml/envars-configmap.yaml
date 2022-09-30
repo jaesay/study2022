@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envar-configmap
+  labels:
+    purpose: demonstrate-envars
+spec:
+  containers:
+  - name: envar-demo-container
+    image: gcr.io/google-samples/node-hello:1.0
+    env:
+    - name: DEMO_GREETING # 환경변수명
+      valueFrom:
+        configMapKeyRef:
+          name: map-name # configmap name과 매칭
+          key: test # configmap test 키의 value와 DEMO_GREETING의 value가 맵핑
