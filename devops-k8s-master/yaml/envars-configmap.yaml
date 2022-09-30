@@ -8,6 +8,9 @@ spec:
   containers:
   - name: envar-demo-container
     image: gcr.io/google-samples/node-hello:1.0
+    # envFrom: # Use envFrom to define all of the ConfigMap's data as container environment variables
+    #   - configMapRef:
+    #       name: special-config
     env:
     - name: DEMO_GREETING # 환경변수명
       valueFrom:

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumes-configmap
+  labels:
+    purpose: demonstrate-envars
+spec:
+  containers:
+  - name: envar-demo-container
+    image: gcr.io/google-samples/node-hello:1.0
+    volumeMounts:
+      - name: config-volume
+        mountPath: /etc/config # configmap의 데이터를 볼륨을 마운트해서 전달
+  volumes:
+    - name: config-volume
+      configMap:
+        # Provide the name of the ConfigMap containing the files you want to add to the container
+        name: special-config
