@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rsc-nginx
+  name: rsc-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rsc-nginx
+  template:
+    metadata:
+      labels:
+        app: rsc-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "1m"
+          limits:
+            memory: "400Mi"
+            cpu: "2m"
+        ports:
+        - containerPort: 80
