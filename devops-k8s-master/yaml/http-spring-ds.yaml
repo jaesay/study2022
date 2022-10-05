@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: http-spring
+spec:
+  selector:
+    matchLabels:
+      name: http-spring
+  template:
+    metadata:
+      labels:
+        name: http-spring
+    spec:
+      tolerations:
+      # 이 톨러레이션(toleration)은 마스터 노드에 포드를 배치할 수 있는 옵션
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: http-spring
+        image: jaesay/http-spring
