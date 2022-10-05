@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: http-spring
+spec:
+  containers:
+  - image: jaesay/http-spring
+    name: http-spring
+  nodeName: multinode-demo-m02
