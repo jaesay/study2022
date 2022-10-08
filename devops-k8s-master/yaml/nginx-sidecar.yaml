@@ -4,25 +4,25 @@ metadata:
   name: nginx-sidecar
 spec:
   containers:
-  - name: nginx
+  - name: nginx # app-container
     image: nginx
     ports:
     - containerPort: 80
     volumeMounts:
     - name: varlognginx
       mountPath: /var/log/nginx 
-  - name: sidecar-access
+  - name: sidecar-access # access.log streaming container
     image: busybox
     args: [/bin/sh, -c, 'tail -n+1 -f /var/log/nginx/access.log']
     volumeMounts:
     - name: varlognginx
       mountPath: /var/log/nginx
-  - name: sidecar-error
+  - name: sidecar-error # error.log streaming container
     image: busybox
     args: [/bin/sh, -c, 'tail -n+1 -f /var/log/nginx/error.log'] 
     volumeMounts:
     - name: varlognginx
       mountPath: /var/log/nginx
-  volumes:
+  volumes: # emptyDir을 통해 멀티컨테이너 간 파일 시스템을 공유한다.
   - name: varlognginx 
     emptyDir: {}
