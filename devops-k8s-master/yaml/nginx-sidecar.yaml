@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-sidecar
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: varlognginx
+      mountPath: /var/log/nginx 
+  - name: sidecar-access
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/nginx/access.log']
+    volumeMounts:
+    - name: varlognginx
+      mountPath: /var/log/nginx
+  - name: sidecar-error
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/nginx/error.log'] 
+    volumeMounts:
+    - name: varlognginx
+      mountPath: /var/log/nginx
+  volumes:
+  - name: varlognginx 
+    emptyDir: {}
