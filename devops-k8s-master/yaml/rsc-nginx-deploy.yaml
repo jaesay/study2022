@@ -18,10 +18,10 @@ spec:
       - image: nginx
         name: nginx
         resources:
-          requests:
+          requests: # 리소스 요청 설정
             memory: "200Mi"
             cpu: "1m"
-          limits:
+          limits: # 리소스 제한 설정
             memory: "400Mi"
             cpu: "2m"
         ports:

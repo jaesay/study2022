@@ -1,19 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
-  labels:
-    app: nginx-deploy-hpa
   name: nginx-deploy-hpa
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: nginx-deploy-hpa
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: nginx-deploy-hpa
     spec:
@@ -22,4 +17,8 @@ spec:
         name: nginx
         ports:
         - containerPort: 80
-        resources: {}
+      resources:
+        limits:
+          cpu: 500m
+        requests:
+          cpu: 200m
