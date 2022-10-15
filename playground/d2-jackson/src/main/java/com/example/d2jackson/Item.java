@@ -1,8 +1,6 @@
 package com.example.d2jackson;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-@JsonDeserialize(using = ItemDeserializer.class)
+//@JsonDeserialize(using = ItemDeserializer.class)
 public class Item {
   private final int id;
   private final String itemName;
