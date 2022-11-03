@@ -10,10 +10,10 @@ public class User {
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
   private LocalDateTime createdDateTime;
 
-  public User(String firstName, String lastName) {
+  public User(String firstName, String lastName, LocalDateTime createdDateTime) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.createdDateTime = LocalDateTime.now();
+    this.createdDateTime = createdDateTime;
   }
 
   private User() {
