@@ -1,4 +1,4 @@
-package jsonformat;
+package serialize.jsonanygetter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class ExtendableBeanTest {
 
   @Test
-  public void whenSerializingUsingJsonAnyGetter_thenCorrect() throws JsonProcessingException {
+  void whenSerializingUsingJsonAnyGetter_thenCorrect() throws JsonProcessingException {
 
     ExtendableBean bean = new ExtendableBean("My bean");
     bean.add("attr1", "val1");

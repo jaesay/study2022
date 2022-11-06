@@ -1,4 +1,4 @@
-package jsonformat;
+package serialize.jsonformat;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +20,7 @@ class UserTest {
   }
 
   @Test
-  public void serializeLocalDateTimeTest() throws JsonProcessingException {
+  void serializeLocalDateTimeTest() throws JsonProcessingException {
     User user = new User(
         "Jay",
         "Sridhar",
@@ -33,7 +33,7 @@ class UserTest {
   }
 
   @Test
-  public void deserializeLocalDateTimeTest() throws JsonProcessingException {
+  void deserializeLocalDateTimeTest() throws JsonProcessingException {
     String userJson = "{\"firstName\":\"Jay\",\"lastName\":\"Sridhar\",\"createdDateTime\":\"2022-11-04T00:00:00\"}";
 
     User user = this.objectMapper.readValue(userJson, User.class);

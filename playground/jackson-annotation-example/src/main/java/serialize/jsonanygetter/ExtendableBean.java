@@ -1,11 +1,11 @@
-package jsonformat;
+package serialize.jsonanygetter;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ExtendableBean {
-  public String name;
+  private String name;
   private Map<String, String> properties;
 
   public ExtendableBean(String name) {

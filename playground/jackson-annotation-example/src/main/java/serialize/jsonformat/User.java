@@ -1,4 +1,4 @@
-package jsonformat;
+package serialize.jsonformat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
