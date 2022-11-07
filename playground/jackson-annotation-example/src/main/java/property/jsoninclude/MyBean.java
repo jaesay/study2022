@@ -1,9 +1,9 @@
-package serialize.jsonpropertyorder;
+package property.jsoninclude;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@JsonPropertyOrder({ "name", "id" })
-//@JsonPropertyOrder(alphabetic = true)
+@JsonInclude(Include.NON_NULL)
 public class MyBean {
   private int id;
   private String name;

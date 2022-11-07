@@ -1,4 +1,4 @@
-package jsonignoreproperties;
+package property.jsonignoreproperties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

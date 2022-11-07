@@ -21,4 +21,8 @@ public class ExtendableBean {
   public void add(String key, String value) {
     properties.put(key, value);
   }
+
+  public String getName() {
+    return name;
+  }
 }

@@ -12,4 +12,12 @@ public class RawBean {
     this.name = name;
     this.json = json;
   }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getJson() {
+    return json;
+  }
 }

@@ -15,4 +15,8 @@ public class MyBean {
   public String getTheName() {
     return name;
   }
+
+  public int getId() {
+    return id;
+  }
 }
