@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class ZooTest {
 
   @Test
-  public void whenSerializingPolymorphic_thenCorrect() throws JsonProcessingException {
+  void whenSerializingPolymorphic_thenCorrect() throws JsonProcessingException {
     Zoo.Dog dog = new Zoo.Dog("lacy");
     Zoo zoo = new Zoo(dog);
 
@@ -22,7 +22,7 @@ class ZooTest {
   }
 
   @Test
-  public void whenDeserializingPolymorphic_thenCorrect() throws IOException {
+  void whenDeserializingPolymorphic_thenCorrect() throws IOException {
     String json = "{\"animal\":{\"name\":\"lacy\",\"type\":\"cat\"}}";
 
     Zoo zoo = new ObjectMapper()
