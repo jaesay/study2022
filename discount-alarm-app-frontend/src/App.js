@@ -14,6 +14,10 @@ function App() {
     console.log("items : ", items);
   }
 
+  const editItem = () => {
+    setItems([...items]);
+  }
+
   const deleteItem = (item) => {
     const newItems = items.filter(e => e.id !== item.id);
     setItems([...newItems]);
@@ -27,6 +31,7 @@ function App() {
                   item={item}
                   key={item.id}
                   deleteItem={deleteItem}
+                  editItem={editItem}
               />
           ))}
         </List>
