@@ -27,17 +27,17 @@ public class KeywordEntity {
 
   private Long memberId;
 
-  private String name;
+  private String title;
 
-  public static KeywordEntity create(long memberId, String name) {
+  public static KeywordEntity create(long memberId, String title) {
     KeywordEntity entity = new KeywordEntity();
     entity.memberId = memberId;
-    entity.name = name;
+    entity.title = title;
     return entity;
   }
 
-  public void editName(String name) {
-    this.name = name;
+  public void editTitle(String title) {
+    this.title = title;
   }
 
   @Override

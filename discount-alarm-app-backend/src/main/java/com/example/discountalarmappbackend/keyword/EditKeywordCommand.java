@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class EditKeywordCommand {
-  private String name;
+  private String title;
 }

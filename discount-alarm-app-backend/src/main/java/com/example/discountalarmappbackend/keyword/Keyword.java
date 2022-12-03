@@ -6,11 +6,11 @@ import lombok.Getter;
 public class Keyword {
   private final Long id;
   private final long memberId;
-  private final String name;
+  private final String title;
 
-  public Keyword(Long id, long memberId, String name) {
+  public Keyword(Long id, long memberId, String title) {
     this.id = id;
     this.memberId = memberId;
-    this.name = name;
+    this.title = title;
   }
 }
