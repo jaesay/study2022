@@ -15,8 +15,8 @@ public class KeywordController {
   private final KeywordService keywordService;
 
   @PostMapping
-  public ResponseEntity<RegisterKeywordCommandResult> registerKeyword(@RequestBody RegisterKeywordCommand command) {
-    RegisterKeywordCommandResult result = keywordService.registerKeyword(command);
+  public ResponseEntity<Keyword> registerKeyword(@RequestBody RegisterKeywordCommand command) {
+    Keyword result = keywordService.registerKeyword(1L, command);
     return ResponseEntity.ok(result);
   }
 }

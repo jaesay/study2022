@@ -11,9 +11,9 @@ public class KeywordService {
   private final KeywordRepository keywordRepository;
 
   @Transactional
-  public RegisterKeywordCommandResult registerKeyword(RegisterKeywordCommand command) {
-    KeywordEntity keyword = KeywordEntity.create(1, command.getName());
-    keywordRepository.save(keyword);
-    return new RegisterKeywordCommandResult(keyword.getId(), keyword.getName());
+  public Keyword registerKeyword(long memberId, RegisterKeywordCommand command) {
+    KeywordEntity entity = KeywordEntity.create(memberId, command.getName());
+    keywordRepository.save(entity);
+    return new Keyword(entity.getId(), entity.getMemberId(), entity.getName());
   }
 }
