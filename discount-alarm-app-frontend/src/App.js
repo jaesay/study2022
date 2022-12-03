@@ -14,6 +14,11 @@ function App() {
     console.log("items : ", items);
   }
 
+  const deleteItem = (item) => {
+    const newItems = items.filter(e => e.id !== item.id);
+    setItems([...newItems]);
+  }
+
   let keywordItems = items.length > 0 && (
       <Paper style={{ margin: 16 }}>
         <List>
@@ -21,6 +26,7 @@ function App() {
               <Keyword
                   item={item}
                   key={item.id}
+                  deleteItem={deleteItem}
               />
           ))}
         </List>
