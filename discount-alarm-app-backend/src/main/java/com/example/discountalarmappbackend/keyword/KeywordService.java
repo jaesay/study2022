@@ -26,4 +26,12 @@ public class KeywordService {
     keywordRepository.save(entity);
     return new Keyword(entity.getId(), entity.getMemberId(), entity.getName());
   }
+
+  @Transactional
+  public Keyword editKeyword(long keywordId, EditKeywordCommand command) {
+    KeywordEntity entity = keywordRepository.findById(keywordId)
+        .orElseThrow(() -> new RuntimeException("Keyword Not Found"));
+    entity.editName(command.getName());
+    return new Keyword(entity.getId(), entity.getMemberId(), entity.getName());
+  }
 }
