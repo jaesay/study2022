@@ -19,14 +19,14 @@ const Keyword = (props) => {
   }
 
   const turnOnReadOnly = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && readOnly === false) {
       setReadOnly(true);
+      editItem(item);
     }
   }
 
   const editEventHandler = (e) => {
-    item.title = e.target.value;
-    editItem();
+    setItem({...item, title: e.target.value});
   }
 
   const deleteEventHandler = () => {
@@ -42,8 +42,8 @@ const Keyword = (props) => {
               onKeyDown={turnOnReadOnly}
               onChange={editEventHandler}
               type="text"
-              id={item.id}
-              name={item.id}
+              id={item.id.toString()}
+              name={item.id.toString()}
               value={item.title}
               multiline={true}
               fullWidth={true}
