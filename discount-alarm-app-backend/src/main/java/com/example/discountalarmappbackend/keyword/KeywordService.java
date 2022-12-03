@@ -1,14 +1,24 @@
 package com.example.discountalarmappbackend.keyword;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class KeywordService {
 
   private final KeywordRepository keywordRepository;
+
+  public List<Keyword> getKeywords(long memberId) {
+    return keywordRepository.findAllByMemberId(memberId)
+        .stream()
+        .map(e -> new Keyword(e.getId(), e.getMemberId(), e.getName()))
+        .collect(Collectors.toList());
+  }
 
   @Transactional
   public Keyword registerKeyword(long memberId, RegisterKeywordCommand command) {
