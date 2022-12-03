@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
+import {Container, List, Paper} from "@mui/material";
+import Keyword from "./Keyword";
+import AddKeyword from "./AddKeyword";
 
 function App() {
+  const [items, setItems] = useState([]);
+
+  const addItem = (item) => {
+    item.id = "ID-" + items.length;
+    item.done = false;
+    setItems([...items, item])
+    console.log("items : ", items);
+  }
+
+  let keywordItems = items.length > 0 && (
+      <Paper style={{ margin: 16 }}>
+        <List>
+          {items.map((item) => (
+              <Keyword
+                  item={item}
+                  key={item.id}
+              />
+          ))}
+        </List>
+      </Paper>
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Container maxWidth="md">
+          <AddKeyword addItem={addItem} />
+          <div className="KeywordList">{keywordItems}</div>
+        </Container>
+      </div>
   );
 }
 
