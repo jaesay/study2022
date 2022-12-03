@@ -19,6 +19,10 @@ function App() {
     setItems([...newItems]);
   }
 
+  const editItem = () => {
+    setItems([...items]);
+  }
+
   let todoItems = items.length > 0 && (
       <Paper style={{ margin: 16 }}>
         <List>
@@ -27,6 +31,7 @@ function App() {
                   item={item}
                   key={item.id}
                   deleteItem={deleteItem}
+                  editItem={editItem}
               />
           ))}
         </List>
