@@ -34,4 +34,9 @@ public class KeywordService {
     entity.editName(command.getName());
     return new Keyword(entity.getId(), entity.getMemberId(), entity.getName());
   }
+
+  @Transactional
+  public void deleteKeyword(long keywordId) {
+    keywordRepository.deleteById(keywordId);
+  }
 }
