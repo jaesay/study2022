@@ -1,26 +1,31 @@
 import './App.css';
 import Todo from "./Todo";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Container, List, Paper} from "@mui/material";
 import AddTodo from "./AddTodo";
+import {call} from "./service/ApiService";
 
 function App() {
   const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    call("/todo", "GET", null)
+    .then((response) => setItems(response.data));
+  }, []);
+
   const addItem = (item) => {
-    item.id = "ID-" + items.length; // key를 위한 id
-    item.done = false;
-    setItems([...items, item]) // 새배열 생성(immutable), 리액트는 레퍼런스를 기준으로 재렌더링하기 때문에 새배열을 만들어줘야 한다.
-    console.log("items : ", items);
+    call("/todo", "POST", item)
+    .then((response) => setItems(response.data));
   }
 
   const deleteItem = (item) => {
-    const newItems = items.filter(e => e.id !== item.id);
-    setItems([...newItems]);
+    call("/todo", "DELETE", item)
+    .then((response) => setItems(response.data));
   }
 
-  const editItem = () => {
-    setItems([...items]);
+  const editItem = (item) => {
+    call("/todo", "PUT", item)
+    .then((response) => setItems(response.data));
   }
 
   let todoItems = items.length > 0 && (

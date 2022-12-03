@@ -23,19 +23,19 @@ const Todo = (props) => {
   }
 
   const turnOnReadOnly = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && readOnly === false) {
       setReadOnly(true);
+      editItem(item);
     }
   }
 
   const editEventHandler = (e) => {
-    item.title = e.target.value;
-    editItem();
+    setItem({...item, title: e.target.value});
   }
 
   const checkboxEventHandler = (e) => {
     item.done = e.target.checked;
-    editItem();
+    editItem(item);
   }
 
   return (
