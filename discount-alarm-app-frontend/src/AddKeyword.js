@@ -22,7 +22,6 @@ const AddKeyword = (props) => {
   // 사용자가 입력할 때마다 인풋필드에 담긴 문자열을 오브젝트에 저장
   const onInputChange = (e) => {
     setItem({title: e.target.value});
-    console.log(item);
   }
 
   return (
