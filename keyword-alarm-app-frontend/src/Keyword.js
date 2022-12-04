@@ -36,18 +36,18 @@ const Keyword = (props) => {
   return (
       <ListItem>
         <ListItemText>
-          <InputBase
-              inputProps={{ "aria-label": "naked", "readOnly": readOnly }}
-              onClick={turnOffReadOnly}
-              onKeyDown={turnOnReadOnly}
-              onChange={editEventHandler}
-              type="text"
-              id={item.id.toString()}
-              name={item.id.toString()}
-              value={item.title}
-              multiline={true}
-              fullWidth={true}
-          />
+            <InputBase
+                inputProps={{ "aria-label": "naked", "readOnly": readOnly }}
+                onClick={turnOffReadOnly}
+                onKeyDown={turnOnReadOnly}
+                onChange={editEventHandler}
+                type="text"
+                id={item.id.toString()}
+                name={item.id.toString()}
+                value={item.title}
+                multiline={true}
+                fullWidth={true}
+            />
         </ListItemText>
         <ListItemSecondaryAction>
           <IconButton
