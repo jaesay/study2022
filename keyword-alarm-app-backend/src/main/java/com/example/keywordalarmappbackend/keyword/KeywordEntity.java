@@ -1,4 +1,4 @@
-package com.example.discountalarmappbackend.keyword;
+package com.example.keywordalarmappbackend.keyword;
 
 import java.util.Objects;
 import javax.persistence.Column;

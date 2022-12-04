@@ -1,10 +1,10 @@
-package com.example.discountalarmappbackend;
+package com.example.keywordalarmappbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DiscountAlarmAppBackendApplicationTests {
+class KeywordAlarmAppBackendApplicationTests {
 
   @Test
   void contextLoads() {

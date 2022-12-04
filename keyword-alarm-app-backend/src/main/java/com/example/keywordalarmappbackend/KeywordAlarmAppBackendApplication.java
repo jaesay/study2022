@@ -1,13 +1,13 @@
-package com.example.discountalarmappbackend;
+package com.example.keywordalarmappbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DiscountAlarmAppBackendApplication {
+public class KeywordAlarmAppBackendApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(DiscountAlarmAppBackendApplication.class, args);
+    SpringApplication.run(KeywordAlarmAppBackendApplication.class, args);
   }
 
 }
