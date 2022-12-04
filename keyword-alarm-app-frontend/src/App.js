@@ -19,7 +19,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    call("/keywords?memberId=1", "GET", null)
+    call("/keywords", "GET", null)
     .then((response) => {
       setItems(response ? response : null);
       setLoading(false);
