@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeRequests()
-        .antMatchers("/", "/auth/**", "/oauth2/**").permitAll()
+        .antMatchers("/", "/auth/**", "/oauth2/**", "/h2-console/**").permitAll()
         .anyRequest()
         .authenticated()
         .and()
@@ -61,6 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .userService(oAuthUserService)
         .and()
         .successHandler(oAuthSuccessHandler)
+        .and()
+        .headers().frameOptions().disable()
         .and()
         .exceptionHandling()
         .authenticationEntryPoint(new Http403ForbiddenEntryPoint());
@@ -79,9 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
 
-    configuration.addAllowedOrigin("http://localhost:3000");
-    configuration.addAllowedHeader("*");
+    configuration.setAllowedOriginPatterns(List.of("*"));
     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(List.of("*"));
     configuration.setAllowCredentials(true);
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
