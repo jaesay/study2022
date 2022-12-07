@@ -1,14 +1,14 @@
 package com.example.keywordalarmappbackend.config;
 
 import com.example.keywordalarmappbackend.auth.JwtAuthenticationFilter;
+import com.example.keywordalarmappbackend.auth.OAuth2UserService;
 import com.example.keywordalarmappbackend.auth.OAuthSuccessHandler;
-import com.example.keywordalarmappbackend.auth.OAuthUserServiceImpl;
 import com.example.keywordalarmappbackend.auth.RedirectUrlCookieFilter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
@@ -18,14 +18,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private JwtAuthenticationFilter jwtAuthenticationFilter;
 
   @Autowired
-  private OAuthUserServiceImpl oAuthUserService;
+  private OAuth2UserService oAuthUserService;
 
   @Autowired
   private OAuthSuccessHandler oAuthSuccessHandler;
