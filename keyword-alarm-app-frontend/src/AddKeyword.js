@@ -26,7 +26,7 @@ const AddKeyword = (props) => {
 
   return (
       <Grid container style={{marginTop: 20}}>
-        <Grid xs={11} md={11} item style={{paddingRight: 16}}>
+        <Grid xs={10.5} md={10.5} item style={{paddingRight: 16}}>
           <TextField
               placeholder="키워드 입력"
               fullWidth
@@ -34,7 +34,7 @@ const AddKeyword = (props) => {
               onKeyPress={enterKeyEventHandler}
               value={item.title} />
         </Grid>
-        <Grid xs={1} md={1} item >
+        <Grid xs={1.5} md={1.5} item >
           <Button fullWidth style={{height: '100%'}} color="secondary" variant="outlined" onClick={onButtonClick}>추가</Button>
         </Grid>
       </Grid>
