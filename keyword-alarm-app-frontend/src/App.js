@@ -62,7 +62,7 @@ function App() {
   // navigationBar 추가
   let navigationBar = (
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar  style={{ color: 'white', backgroundColor: '#FF5F85' }}>
           <Grid justifyContent="space-between" container>
             <Grid item>
               <Typography variant="h6">내 알림 키워드</Typography>
