@@ -7,10 +7,10 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
+public class OAuth2UserService extends DefaultOAuth2UserService {
   private final MemberRepository memberRepository;
 
-  public OAuthUserServiceImpl(MemberRepository memberRepository) {
+  public OAuth2UserService(MemberRepository memberRepository) {
     this.memberRepository = memberRepository;
   }
 
