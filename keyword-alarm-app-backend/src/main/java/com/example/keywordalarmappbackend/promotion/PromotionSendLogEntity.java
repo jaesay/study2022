@@ -15,7 +15,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.Hibernate;
-import org.springframework.data.annotation.CreatedDate;
 
 @Table(name = "promotion_send_log")
 @Entity
@@ -32,13 +31,16 @@ public class PromotionSendLogEntity {
   @ToString.Exclude
   private PromotionEntity promotion;
 
-  @CreatedDate
   private LocalDateTime sentAt;
 
   public static PromotionSendLogEntity create(PromotionEntity promotion) {
     PromotionSendLogEntity entity = new PromotionSendLogEntity();
     entity.promotion = promotion;
     return entity;
+  }
+
+  public void setSentAt(LocalDateTime sentAt) {
+    this.sentAt = sentAt;
   }
 
   @Override
