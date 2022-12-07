@@ -21,14 +21,14 @@ public class KeywordController {
   private final KeywordService keywordService;
 
   @GetMapping
-  public ResponseEntity<List<Keyword>> getKeywords(@AuthenticationPrincipal String userId) {
-    List<Keyword> keywords = keywordService.getKeywords(Long.parseLong(userId));
+  public ResponseEntity<List<Keyword>> getKeywords(@AuthenticationPrincipal String memberId) {
+    List<Keyword> keywords = keywordService.getKeywords(Long.parseLong(memberId));
     return ResponseEntity.ok(keywords);
   }
 
   @PostMapping
-  public ResponseEntity<Keyword> registerKeyword(@RequestBody RegisterKeywordCommand command) {
-    Keyword result = keywordService.registerKeyword(1L, command);
+  public ResponseEntity<Keyword> registerKeyword(@AuthenticationPrincipal String memberId, @RequestBody RegisterKeywordCommand command) {
+    Keyword result = keywordService.registerKeyword(Long.parseLong(memberId), command);
     return ResponseEntity.ok(result);
   }
 
