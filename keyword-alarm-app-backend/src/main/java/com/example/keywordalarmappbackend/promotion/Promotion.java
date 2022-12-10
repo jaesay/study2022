@@ -10,6 +10,8 @@ public class Promotion {
   private String category;
   private String type;
   private String title;
+
+  private String link;
   private LocalDateTime contentCreatedAt;
 
   public static Promotion from(PromotionEntity entity) {

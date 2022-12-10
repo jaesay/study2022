@@ -2,18 +2,15 @@ package com.example.keywordalarmappbackend.promotion;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
-@Table(name = "promotion")
+@Table(name = "tb_promotion")
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -41,6 +38,9 @@ public class PromotionEntity {
    */
   private LocalDateTime contentCreatedAt;
 
+  @Column(name = "is_sent")
+  private Boolean isSent = false;
+
   public static PromotionEntity create(String contentId, String category, String type, String title, LocalDateTime contentCreatedAt) {
     PromotionEntity entity = new PromotionEntity();
     entity.contentId = contentId;
@@ -48,6 +48,7 @@ public class PromotionEntity {
     entity.type = type;
     entity.title = title;
     entity.contentCreatedAt = contentCreatedAt;
+    entity.isSent = false;
     return entity;
   }
 
@@ -66,5 +67,9 @@ public class PromotionEntity {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+
+  public void setWasSent() {
+    this.isSent = true;
   }
 }

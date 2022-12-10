@@ -26,7 +26,7 @@ const Keyword = (props) => {
   }
 
   const editEventHandler = (e) => {
-    setItem({...item, title: e.target.value});
+    setItem({...item, keyword: e.target.value});
   }
 
   const deleteEventHandler = () => {
@@ -44,7 +44,7 @@ const Keyword = (props) => {
                 type="text"
                 id={item.id.toString()}
                 name={item.id.toString()}
-                value={item.title}
+                value={item.keyword}
                 multiline={true}
                 fullWidth={true}
             />

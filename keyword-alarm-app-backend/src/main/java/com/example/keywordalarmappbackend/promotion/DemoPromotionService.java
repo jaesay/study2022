@@ -1,33 +1,49 @@
 package com.example.keywordalarmappbackend.promotion;
 
-import com.example.keywordalarmappbackend.keyword.KeywordEntity;
-import com.example.keywordalarmappbackend.keyword.KeywordRepository;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class DemoPromotionService implements PromotionService {
 
   private final PromotionRepository promotionRepository;
-  private final KeywordRepository keywordRepository;
 
-  // TODO jaesay: 키워드 추출 가능 시 전환하기
-  public List<Promotion> getPromotions(long memberId) {
-    Set<PromotionEntity> entities = keywordRepository.findAllByMemberId(memberId)
-        .stream()
-        .map(KeywordEntity::getTitle)
-        .map(promotionRepository::findAllByTitleContaining)
-        .flatMap(List::stream)
-        .collect(Collectors.toSet());
+  public Optional<PromotionEntity> findByContentId(String contentId) {
+    return this.promotionRepository.findByContentId(contentId);
+  }
 
-    return entities.stream()
-        .map(Promotion::from)
-        .collect(Collectors.toList());
+  @Async
+  @Transactional
+  public void asyncSaveIfContentIdIsNotExists(List<PromotionEntity> promotions) {
+
+    for (var promotion: promotions) {
+      var contentId = promotion.getContentId();
+      if (findByContentId(contentId).isEmpty()) {
+        this.promotionRepository.save(promotion);
+        log.debug("promotion {} was skipped, already exists.", promotion.getContentId());
+      }
+    }
+  }
+
+  @Override
+  @Transactional
+  public void setWasSent(Long id) {
+    var promotion = this.promotionRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("failed to find promotion by id, " + id));
+    promotion.setWasSent();
+    this.promotionRepository.save(promotion);
+  }
+
+  @Override
+  public List<PromotionEntity> findByIsSent(boolean b) {
+    return this.promotionRepository.findByIsSent(b);
   }
 }

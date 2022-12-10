@@ -1,12 +1,22 @@
+app:
+  crawler.blossom:
+    account:
+      id: 실행파라미터사용
+      pw: 실행파라미터사용
+  auth.kakao:
+    clientId: 실행파라미터사용
+    clientSecret: 실행파라미터사용
+
+
 spring:
   application:
     name: keyword-alarm-app-backend
 
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://localhost:23306/samsung?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC&tinyInt1isBit=false"
+    username: root
+    password: password
 
   h2:
     console:
@@ -15,11 +25,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
-        show_sql: true
-        format_sql: true
+        show_sql: false
+        format_sql: false
     open-in-view: false
 
   security:
@@ -27,8 +37,8 @@ spring:
       client:
         registration:
           kakao:
-            clientId: 카카오클라이언트아이디(REST API KEY)
-            clientSecret: 카카오클라이언트아이디시크릿
+            clientId: ${app.auth.kakao.clientId}
+            clientSecret: ${app.auth.kakao.clientSecret}
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
             redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
@@ -45,5 +55,8 @@ spring:
             userNameAttribute: id
 
 logging.level:
-  org.hibernate.SQL: debug
-  org.hibernate.type: trace
+  org.hibernate.SQL: WARN
+  org.hibernate.type: WARN
+  org.asynchttpclient.netty.channel: INFO
+  org.openqa.selenium: ERROR
+  com.example.keywordalarmappbackend: DEBUG

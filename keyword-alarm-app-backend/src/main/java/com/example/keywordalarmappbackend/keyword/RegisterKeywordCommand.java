@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class RegisterKeywordCommand {
-  private String title;
+  private String keyword;
 }

@@ -16,22 +16,22 @@ public class KeywordService {
   public List<Keyword> getKeywords(long memberId) {
     return keywordRepository.findAllByMemberId(memberId)
         .stream()
-        .map(e -> new Keyword(e.getId(), e.getMemberId(), e.getTitle()))
+        .map(e -> new Keyword(e.getId(), e.getMemberId(), e.getKeyword()))
         .collect(Collectors.toList());
   }
 
   @Transactional
   public Keyword registerKeyword(long memberId, RegisterKeywordCommand command) {
-    KeywordEntity entity = KeywordEntity.create(memberId, command.getTitle());
+    UserKeywordEntity entity = UserKeywordEntity.create(memberId, command.getKeyword());
     keywordRepository.save(entity);
-    return new Keyword(entity.getId(), entity.getMemberId(), entity.getTitle());
+    return new Keyword(entity.getId(), entity.getMemberId(), entity.getKeyword());
   }
 
   @Transactional
   public void editKeyword(long keywordId, EditKeywordCommand command) {
-    KeywordEntity entity = keywordRepository.findById(keywordId)
+    UserKeywordEntity entity = keywordRepository.findById(keywordId)
         .orElseThrow(() -> new RuntimeException("Keyword Not Found"));
-    entity.editTitle(command.getTitle());
+    entity.editKeyword(command.getKeyword());
   }
 
   @Transactional
