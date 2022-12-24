@@ -1,9 +1,10 @@
-package com.example.inflearnthejavatest;
+package com.example.inflearnthejavatest._01_junit5._02_basic_annot;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class StudyTest {
@@ -24,6 +25,7 @@ class StudyTest {
   }
 
   @Test
+  @Disabled
   void test2() {
     System.out.println("test2");
   }
