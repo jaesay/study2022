@@ -2,7 +2,7 @@ package com.example.inflearnthejavatest._01_junit5._08_test_iter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.inflearnthejavatest._01_junit5.Study;
+import com.example.inflearnthejavatest.Study;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;

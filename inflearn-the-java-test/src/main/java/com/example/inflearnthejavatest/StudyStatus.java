@@ -1,4 +1,4 @@
-package com.example.inflearnthejavatest._01_junit5;
+package com.example.inflearnthejavatest;
 
 public enum StudyStatus {
   DRAFT, STARTED, ENDED
