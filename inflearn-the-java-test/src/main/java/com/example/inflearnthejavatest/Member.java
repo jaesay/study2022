@@ -13,6 +13,7 @@ public class Member {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
+  private String email;
 
   public Long getId() {
     return id;
@@ -22,6 +23,11 @@ public class Member {
     this.id = id;
   }
 
-  protected Member() {
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 }
