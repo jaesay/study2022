@@ -1,28 +1,24 @@
 package com.example.inflearnthejavatest;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "study")
 public class Study {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
+  @Id @GeneratedValue
   private Long id;
 
-  private int limit;
+  private int limitCount;
   private StudyStatus status = StudyStatus.DRAFT;
 
   private String name;
-  @OneToOne
-  @JoinColumn(name = "owner_id")
-  private Member owner;
+  private Long ownerId;
 
   public Long getId() {
     return id;
@@ -32,17 +28,17 @@ public class Study {
     this.id = id;
   }
 
-  public Study(int limit) {
-    this.limit = limit;
+  public Study(int limitCount) {
+    this.limitCount = limitCount;
   }
 
-  public Study(int limit, String name) {
-    this.limit = limit;
+  public Study(int limitCount, String name) {
+    this.limitCount = limitCount;
     this.name = name;
   }
 
-  public int getLimit() {
-    return limit;
+  public int getLimitCount() {
+    return limitCount;
   }
 
   public StudyStatus getStatus() {
@@ -56,18 +52,18 @@ public class Study {
   @Override
   public String toString() {
     return "Study{" +
-        "limit=" + limit +
+        "limit=" + limitCount +
         ", status=" + status +
         ", name='" + name + '\'' +
         '}';
   }
 
-  public Member getOwner() {
-    return owner;
+  public Long getOwnerId() {
+    return ownerId;
   }
 
-  public void setOwner(Member member) {
-    this.owner = member;
+  public void setOwnerId(Long ownerId) {
+    this.ownerId = ownerId;
   }
 
   protected Study() {

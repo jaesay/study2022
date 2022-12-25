@@ -17,7 +17,7 @@ class StudyTest {
   @Tag("fast")
   void create_new_study() {
     Study study = new Study(10);
-    assertThat(study.getLimit()).isGreaterThan(0);
+    assertThat(study.getLimitCount()).isGreaterThan(0);
   }
 
   @Test

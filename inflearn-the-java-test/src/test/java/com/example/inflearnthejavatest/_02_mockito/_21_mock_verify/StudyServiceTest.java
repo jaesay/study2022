@@ -43,7 +43,7 @@ class StudyServiceTest {
 
     studyService.createNewStudy(1L, study);
 
-    assertEquals(member, study.getOwner());
+    assertEquals(member.getId(), study.getOwnerId());
 
     verify(memberService, times(1)).notify(study);
     verify(memberService, never()).validate(any());

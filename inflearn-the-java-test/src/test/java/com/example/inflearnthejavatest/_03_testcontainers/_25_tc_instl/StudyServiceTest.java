@@ -1,15 +1,10 @@
-package com.example.inflearnthejavatest._02_mockito._22_bdd_mockito;
+package com.example.inflearnthejavatest._03_testcontainers._25_tc_instl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.example.inflearnthejavatest.Member;
 import com.example.inflearnthejavatest.MemberService;
@@ -17,17 +12,47 @@ import com.example.inflearnthejavatest.Study;
 import com.example.inflearnthejavatest.StudyRepository;
 import com.example.inflearnthejavatest.StudyService;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
+@ActiveProfiles("test")
+@Testcontainers
 class StudyServiceTest {
 
   @Mock MemberService memberService;
-  @Mock StudyRepository studyRepository;
+  @Autowired StudyRepository studyRepository;
+
+  @Container
+  static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres")
+      .withDatabaseName("studytest");
+
+  @BeforeEach
+  void beforeEach() {
+    studyRepository.deleteAll();
+  }
+
+//  @BeforeAll
+//  static void beforeAll() {
+//    postgreSQLContainer.start();
+//  }
+//
+//  @AfterAll
+//  static void afterAll() {
+//    postgreSQLContainer.stop();
+//  }
 
   @Test
   void createStudyService() {
@@ -42,7 +67,6 @@ class StudyServiceTest {
     Study study = new Study(10, "테스트");
 
     given(memberService.findById(1L)).willReturn(Optional.of(member));
-    given(studyRepository.save(study)).willReturn(study);
 
     // When
     studyService.createNewStudy(1L, study);

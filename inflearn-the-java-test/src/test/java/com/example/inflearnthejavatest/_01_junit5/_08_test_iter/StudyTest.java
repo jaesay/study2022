@@ -41,7 +41,7 @@ class StudyTest {
   @ParameterizedTest(name = "{index} {displayName} limit={0}")
   @ValueSource(ints = {10, 20, 30})
   void parameterized_test2(@ConvertWith(StudyConverter.class) Study study) {
-    System.out.println(study.getLimit());
+    System.out.println(study.getLimitCount());
   }
 
   // 하나의 아규먼트에만 적용
