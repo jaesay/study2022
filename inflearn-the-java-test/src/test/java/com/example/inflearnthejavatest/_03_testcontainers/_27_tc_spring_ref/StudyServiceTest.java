@@ -6,11 +6,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.times;
 
-import com.example.inflearnthejavatest.Member;
-import com.example.inflearnthejavatest.MemberService;
-import com.example.inflearnthejavatest.Study;
-import com.example.inflearnthejavatest.StudyRepository;
-import com.example.inflearnthejavatest.StudyService;
+import com.example.inflearnthejavatest.domain.Member;
+import com.example.inflearnthejavatest.member.MemberService;
+import com.example.inflearnthejavatest.domain.Study;
+import com.example.inflearnthejavatest.study.StudyRepository;
+import com.example.inflearnthejavatest.study.StudyService;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;

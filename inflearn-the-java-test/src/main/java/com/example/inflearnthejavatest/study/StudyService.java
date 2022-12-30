@@ -1,4 +1,8 @@
-package com.example.inflearnthejavatest;
+package com.example.inflearnthejavatest.study;
+
+import com.example.inflearnthejavatest.domain.Member;
+import com.example.inflearnthejavatest.domain.Study;
+import com.example.inflearnthejavatest.member.MemberService;
 
 public class StudyService {
   private final MemberService memberService;

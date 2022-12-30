@@ -7,10 +7,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
-import com.example.inflearnthejavatest.Member;
-import com.example.inflearnthejavatest.MemberService;
-import com.example.inflearnthejavatest.StudyRepository;
-import com.example.inflearnthejavatest.StudyService;
+import com.example.inflearnthejavatest.domain.Member;
+import com.example.inflearnthejavatest.member.MemberService;
+import com.example.inflearnthejavatest.study.StudyRepository;
+import com.example.inflearnthejavatest.study.StudyService;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
